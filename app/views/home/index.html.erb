@@ -1,1 +1,11 @@
 <h1>MarketPlace</h1>
+
+<h3>Categorias</h3>
+
+<% @product_categories.each do |product_category| %>
+  <%= product_category.name %>
+<% end %>
+
+<% if @product_categories.empty? %>
+  <h5>Nenhuma categoria cadastrada</h5>
+<% end %>
