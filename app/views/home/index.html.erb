@@ -3,7 +3,7 @@
 <h3>Categorias</h3>
 
 <% @product_categories.each do |product_category| %>
-  <%= product_category.name %>
+  <%= link_to product_category.name, product_category %>
 <% end %>
 
 <% if @product_categories.empty? %>

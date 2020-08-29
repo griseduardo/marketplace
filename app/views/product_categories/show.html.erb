@@ -1,0 +1,11 @@
+<h1><%= @product_category.name %></h1>
+
+<h3>Subcategorias</h3>
+
+<% @product_category.product_subcategories.each do |product_subcategory| %>
+  <%= product_subcategory.name %>
+<% end %>
+
+<% if @product_category.product_subcategories.empty? %>
+  <h5>Nenhuma subcategoria cadastrada</h5>
+<% end %>

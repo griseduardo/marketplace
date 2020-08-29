@@ -1,0 +1,3 @@
+class ProductSubcategoriesController < ApplicationController
+
+end
