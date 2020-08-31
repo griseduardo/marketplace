@@ -1,3 +1,10 @@
+<% if user_signed_in? %>
+  <%= current_user.company.name %>
+  <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to 'Criar conta', new_user_registration_path %>
+<% end %>
+
 <h1>MarketPlace</h1>
 
 <h3>Categorias</h3>

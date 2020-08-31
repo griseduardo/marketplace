@@ -1,4 +1,6 @@
 class Company < ApplicationRecord
+  has_many :users
+
   validates :name, :cnpj, :domain, presence: true
   validates :cnpj, :domain, uniqueness: { case_sensitive: false }
   validates :cnpj, length: { is: 18 }
