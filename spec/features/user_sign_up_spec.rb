@@ -18,10 +18,10 @@ feature 'User sign up' do
     fill_in 'Confirmação de senha', with: '123456'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Rotes'
-    expect(page).not_to have_content 'Lorc'
-    expect(page).to have_content 'Você realizou seu registro com sucesso.'
-    expect(page).to have_link 'Sair'
+    expect(page).to have_content('Rotes')
+    expect(page).not_to have_content('Lorc')
+    expect(page).to have_content('Você realizou seu registro com sucesso.')
+    expect(page).to have_link('Sair')
   end
 
   scenario 'must fill in all fields' do
@@ -29,9 +29,9 @@ feature 'User sign up' do
     click_on 'Criar conta'
     click_on 'Cadastrar'
 
-    expect(page).to have_content 'Não foi possível salvar usuário: 3 erros.'
-    expect(page).to have_content 'Email não pode ficar em branco'
-    expect(page).to have_content 'Senha não pode ficar em branco'
-    expect(page).to have_content 'Empresa é obrigatório(a)'
+    expect(page).to have_content('Não foi possível salvar usuário: 3 erros.')
+    expect(page).to have_content('Email não pode ficar em branco')
+    expect(page).to have_content('Senha não pode ficar em branco')
+    expect(page).to have_content('Empresa é obrigatório(a)')
   end
 end

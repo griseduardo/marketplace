@@ -1,18 +1,19 @@
-<% if user_signed_in? %>
-  <%= current_user.company.name %>
-  <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Criar conta', new_user_registration_path %>
-<% end %>
-
 <h1>MarketPlace</h1>
 
-<h3>Categorias</h3>
+<% if user_signed_in? %>
+  <div><%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>
+  <div><%= current_user.company.name %></div>
 
-<% @product_categories.each do |product_category| %>
-  <%= link_to product_category.name, product_category %>
-<% end %>
+  <h3>Categorias</h3>
 
-<% if @product_categories.empty? %>
-  <h5>Nenhuma categoria cadastrada</h5>
+  <% @product_categories.each do |product_category| %>
+    <%= link_to product_category.name, product_category %>
+  <% end %>
+
+  <% if @product_categories.empty? %>
+    <h5>Nenhuma categoria cadastrada</h5>
+  <% end %>
+<% else %>
+  <%= link_to 'Criar conta', new_user_registration_path %>
+  <%= link_to 'Entrar', new_user_session_path %>
 <% end %>
