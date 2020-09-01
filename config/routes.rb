@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   resources :product_categories, only: [:show]
+  resources :profiles, only: [:show, :new, :create]
 end

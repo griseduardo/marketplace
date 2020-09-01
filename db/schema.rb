@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_31_220045) do
+ActiveRecord::Schema.define(version: 2020_09_01_141550) do
 
   create_table "companies", force: :cascade do |t|
     t.string "name"
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 2020_08_31_220045) do
     t.index ["product_category_id"], name: "index_product_subcategories_on_product_category_id"
   end
 
+  create_table "profiles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "full_name"
+    t.string "chosen_name"
+    t.date "birthday"
+    t.string "position"
+    t.string "sector"
+    t.integer "department_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "work_address"
+    t.index ["department_id"], name: "index_profiles_on_department_id"
+    t.index ["user_id"], name: "index_profiles_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -56,4 +71,6 @@ ActiveRecord::Schema.define(version: 2020_08_31_220045) do
   end
 
   add_foreign_key "product_subcategories", "product_categories"
+  add_foreign_key "profiles", "departments"
+  add_foreign_key "profiles", "users"
 end

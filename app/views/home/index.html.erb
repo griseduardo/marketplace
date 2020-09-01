@@ -1,8 +1,9 @@
 <h1>MarketPlace</h1>
 
 <% if user_signed_in? %>
-  <div><%= link_to 'Sair', destroy_user_session_path, method: :delete %></div>
-  <div><%= current_user.company.name %></div>
+  <%= link_to 'Meu perfil', new_profile_path %>
+  <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
+  <h2><%= current_user.company.name %></h2>
 
   <h3>Categorias</h3>
 
@@ -11,7 +12,7 @@
   <% end %>
 
   <% if @product_categories.empty? %>
-    <h5>Nenhuma categoria cadastrada</h5>
+    <div>Nenhuma categoria cadastrada<div>
   <% end %>
 <% else %>
   <%= link_to 'Criar conta', new_user_registration_path %>

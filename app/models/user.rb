@@ -5,11 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :company
+  has_one :profile
   
   before_validation :add_company
 
   private
-    def add_company
-      self.company = Company.find_by domain: email.split('@').last
-    end
+  
+  def add_company
+    self.company = Company.find_by domain: email.split('@').last
+  end
 end

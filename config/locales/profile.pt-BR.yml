@@ -1,0 +1,17 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      profile: 'Perfil'
+    attributes:
+      profile:
+        full_name: 'Nome completo'
+        chosen_name: 'Nome social'
+        birthday: 'Data de nascimento'
+        position: 'Cargo'
+        sector: 'Setor'
+        department: 'Departamento'
+        department_id: 'Departamento'
+        user: 'Usuário'
+        user_id: 'Usuário'
+        work_address: 'Endereço de trabalho'
