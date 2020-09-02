@@ -1,9 +1,12 @@
 <h1>Profile</h1>
+
 <dl>
+  <% if @profile.chosen_name.present? %>
+    <dt><%= Profile.human_attribute_name(:chosen_name) %></dt>
+    <dd><%= @profile.chosen_name %></dd>
+  <% end %>
   <dt><%= Profile.human_attribute_name(:full_name) %></dt>
   <dd><%= @profile.full_name %></dd>
-  <dt><%= Profile.human_attribute_name(:chosen_name) %></dt>
-  <dd><%= @profile.chosen_name %></dd>
   <dt><%= Profile.human_attribute_name(:user) %></dt>
   <dd><%= @profile.user.email %></dd>
   <dt><%= Profile.human_attribute_name(:birthday) %></dt>
@@ -12,8 +15,10 @@
   <dd><%= @profile.work_address %></dd>
   <dt><%= Profile.human_attribute_name(:position) %></dt>
   <dd><%= @profile.position %></dd>
-  <dt><%= Profile.human_attribute_name(:sector) %></dt>
-  <dd><%= @profile.sector %></dd>
+  <% if @profile.sector.present? %>
+    <dt><%= Profile.human_attribute_name(:sector) %></dt>
+    <dd><%= @profile.sector %></dd>
+  <% end %>
   <dt><%= Profile.human_attribute_name(:department) %></dt>
   <dd><%= @profile.department.name %></dd>
 </dl>

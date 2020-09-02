@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   has_many :users
+  has_many :profiles, through: :users
 
   validates :name, :cnpj, :domain, presence: true
   validates :cnpj, :domain, uniqueness: { case_sensitive: false }

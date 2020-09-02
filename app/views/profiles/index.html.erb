@@ -1,0 +1,19 @@
+<h1>Vendedores</h1>
+
+<% @profiles.each do |profile| %>
+  <% if profile.user != current_user %>
+    <% if profile.chosen_name.blank? %>
+      <h3><%= link_to profile.full_name, profile %></h3>
+    <% else %>
+      <h3><%= link_to profile.chosen_name, profile %></h3>  
+    <% end %>
+    <ul>
+      <li><%= profile.user.email %></li>
+      <li><%= profile.work_address %></li>
+    </ul>
+  <% end %>
+<% end %>
+
+<% if @profiles.count == 1 && current_user.profile.present? || @profiles.count == 0 %>
+  <h5>Nenhum perfil registrado</h5>
+<% end %>

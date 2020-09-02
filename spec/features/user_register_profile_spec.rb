@@ -63,7 +63,7 @@ feature 'User register profile' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user = User.create!(email: 'carol@rotes.com', password: '123456')
     department = Department.create!(name: 'RH')
-    Profile.create!(full_name: 'pedro', birthday: '10/03/1993', position: 'Auxiliar', 
+    Profile.create!(full_name: 'Carol Pires', birthday: '10/03/1993', position: 'Auxiliar', 
                     department: department, user: user, work_address: 'Rua Evans, 30')
 
     login_as(user, scope: :user)

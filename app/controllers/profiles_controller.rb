@@ -1,5 +1,10 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: [ :new ]
+  before_action :authenticate_user!, only: [ :index, :show, :new, :create ]
+
+  def index
+    @users = User.all.where(company: current_user.company)
+    @profiles = Profile.all.where(user: @users)
+  end
 
   def show
     @profile = Profile.find(params[:id])
