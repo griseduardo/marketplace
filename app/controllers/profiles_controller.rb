@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :authenticate_user!, only: [ :index, :show, :new, :create ]
+  before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update ]
 
   def index
     @users = User.all.where(company: current_user.company)
@@ -23,6 +23,21 @@ class ProfilesController < ApplicationController
     else
       @department = Department.all
       render :new
+    end
+  end
+
+  def edit
+    @profile = Profile.find(params[:id])
+    @department = Department.all
+  end
+  
+  def update
+    @profile = Profile.find(params[:id])
+    if @profile.update(profile_params)
+      redirect_to edit_profile_path(@profile), notice: 'Atualizado com sucesso!'
+    else
+      @department = Department.all
+      render :edit
     end
   end
 

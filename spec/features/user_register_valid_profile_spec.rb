@@ -21,7 +21,7 @@ feature 'User register valid profile' do
     expect(page).to have_content('é obrigatório', count: 1)
   end
 
-  scenario 'and just one time is allowed for user' do
+  scenario 'and is allowed just one time for user' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user = User.create!(email: 'carol@rotes.com', password: '123456')
     department = Department.create!(name: 'RH')

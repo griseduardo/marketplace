@@ -1,7 +1,11 @@
 <h1>MarketPlace</h1>
 
 <% if user_signed_in? %>
-  <%= link_to 'Meu perfil', new_profile_path %>
+  <% if current_user.profile.blank? %>
+    <%= link_to 'Meu perfil', new_profile_path %>
+  <% else %>
+    <%= link_to 'Meu perfil', edit_profile_path(@profile = current_user.profile) %>
+  <% end %>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2><%= current_user.company.name %></h2>
 
