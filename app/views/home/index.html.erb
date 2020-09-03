@@ -6,6 +6,7 @@
   <% else %>
     <%= link_to 'Meu perfil', edit_profile_path(@profile = current_user.profile) %>
   <% end %>
+  <%= link_to 'Cadastrar produto', new_product_path %>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2><%= current_user.company.name %></h2>
 
