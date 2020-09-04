@@ -21,7 +21,7 @@ feature 'User register valid product' do
     click_on 'Cadastrar'
 
     expect(Product.count).to eq 0
-    expect(page).to have_content('não pode ficar em branco', count: 4)
+    expect(page).to have_content('não pode ficar em branco', count: 5)
     expect(page).to have_content('é obrigatório', count: 2)
   end
 

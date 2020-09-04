@@ -24,3 +24,7 @@
   <dt><%= Product.human_attribute_name(:quantity) %></dt>
   <dd><%= @product.quantity %></dd>
 </dl>
+
+<% @product.images.each do |image| %>
+  <%= image_tag image %>
+<% end %>

@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create ]
+  before_action :authenticate_user!, only: [ :show, :new, :create ]
 
   def show
     @product = Product.find(params[:id])
@@ -36,6 +36,6 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product)
           .permit(:name, :product_subcategory_id, :description, :price, 
-                  :product_condition_id, :quantity, :profile_id)
+                  :product_condition_id, :quantity, :profile_id, images:[])
   end
 end

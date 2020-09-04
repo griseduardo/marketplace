@@ -45,6 +45,7 @@ feature 'User register product' do
     fill_in 'Preço', with: '240'
     select 'Usado', from: 'Condição'
     fill_in 'Quantidade', with: '2'
+    attach_file 'Imagens', [Rails.root.join('app', 'assets', 'images', 'fevernova1.jpg'), Rails.root.join('app', 'assets', 'images', 'fevernova2.jpg')] 
     click_on 'Cadastrar'
 
     expect(page).to have_content('Cadastrado com sucesso!')
@@ -78,5 +79,6 @@ feature 'User register product' do
     expect(page).to have_content('Preço não pode ficar em branco')
     expect(page).to have_content('Condição é obrigatório(a)')
     expect(page).to have_content('Quantidade não pode ficar em branco')
+    expect(page).to have_content('Imagens não pode ficar em branco')
   end
 end

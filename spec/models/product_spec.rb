@@ -11,6 +11,7 @@ describe Product, type: :model do
       expect(product.errors[:description]).to include('não pode ficar em branco')
       expect(product.errors[:price]).to include('não pode ficar em branco')
       expect(product.errors[:quantity]).to include('não pode ficar em branco')
+      expect(product.errors[:images]).to include('não pode ficar em branco')
       expect(product.errors[:product_subcategory]).to include('é obrigatório(a)')
       expect(product.errors[:product_condition]).to include('é obrigatório(a)')
       expect(product.errors[:profile]).to include('é obrigatório(a)')
