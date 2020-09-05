@@ -9,6 +9,15 @@ feature 'User view product subcategories' do
     expect(current_path).to eq new_user_session_path
   end
 
+  scenario 'must be logged in to view subcategory details' do
+    product_category = ProductCategory.create!(name: 'Esporte e lazer')
+    product_subcategory = ProductSubcategory.create!(name: 'Futebol', product_category: product_category)
+
+    visit product_subcategory_path(product_subcategory)
+
+    expect(current_path).to eq new_user_session_path
+  end
+
   scenario 'succesfully' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user = User.create!(email: 'joaquim@rotes.com', password: '123456')
@@ -38,5 +47,21 @@ feature 'User view product subcategories' do
     click_on 'Eletrodomésticos'
 
     expect(page).to have_content('Nenhuma subcategoria cadastrada')
+  end
+
+  scenario 'and view details' do
+    Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
+    user = User.create!(email: 'joaquim@rotes.com', password: '123456')
+    product_category = ProductCategory.create!(name: 'Esporte e lazer')
+    ProductSubcategory.create!(name: 'Futebol', product_category: product_category)
+    ProductSubcategory.create!(name: 'Basquete', product_category: product_category)
+    
+    login_as(user, scope: :user)
+    visit root_path
+    click_on 'Esporte e lazer'
+    click_on 'Futebol'
+
+    expect(page).to have_content('Futebol')
+    expect(page).not_to have_content('Basquete')
   end
 end
