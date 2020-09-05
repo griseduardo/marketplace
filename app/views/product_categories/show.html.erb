@@ -3,9 +3,22 @@
 <h3>Subcategorias</h3>
 
 <% @product_category.product_subcategories.each do |product_subcategory| %>
-  <%= product_subcategory.name %>
+  <%= link_to product_subcategory.name, product_subcategory %>
 <% end %>
 
 <% if @product_category.product_subcategories.empty? %>
   <h5>Nenhuma subcategoria cadastrada</h5>
+<% end %>
+
+<h3>Produtos</h3>
+
+<% @products.each do |product| %>
+  <% if product.profile.user != current_user %>
+    <%= link_to image_tag(product.images.first), product %>
+    <%= link_to product.name, product %>
+  <% end %>
+<% end %>
+
+<% if @products.empty? %>
+    <div>Nenhum produto disponível<div>
 <% end %>

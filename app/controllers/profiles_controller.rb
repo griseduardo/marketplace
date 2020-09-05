@@ -8,6 +8,7 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = Profile.find(params[:id])
+    @products = Product.where(profile: @profile)
   end
   
   def new

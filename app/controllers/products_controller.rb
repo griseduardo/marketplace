@@ -1,5 +1,10 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [ :show, :new, :create ]
+  before_action :authenticate_user!, only: [ :index, :show, :new, :create ]
+
+  def index
+    @profile = Profile.find_by(user: current_user)
+    @products = Product.where(profile: @profile)
+  end
 
   def show
     @product = Product.find(params[:id])

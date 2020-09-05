@@ -22,3 +22,14 @@
   <dt><%= Profile.human_attribute_name(:department) %></dt>
   <dd><%= @profile.department.name %></dd>
 </dl>
+
+<% @products.each do |product| %>
+  <% if product.profile.user != current_user %>
+    <%= link_to image_tag(product.images.first), product %>
+    <%= link_to product.name, product %>
+  <% end %>
+<% end %>
+
+<% if @products.empty? %>
+    <div>Nenhum produto disponível<div>
+<% end %>
