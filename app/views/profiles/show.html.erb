@@ -1,4 +1,4 @@
-<h1>Profile</h1>
+<h1>Vendedor</h1>
 
 <dl>
   <% if @profile.chosen_name.present? %>
@@ -22,6 +22,12 @@
   <dt><%= Profile.human_attribute_name(:department) %></dt>
   <dd><%= @profile.department.name %></dd>
 </dl>
+
+<%= form_with url: search_profile_path, method: :get, local: true do |f| %>
+  <%= f.label :q, 'Busca de produto' %>
+  <%= f.text_field :q %>
+  <%= f.submit 'Buscar' %>
+<% end %>
 
 <% @products.each do |product| %>
   <% if product.profile.user != current_user %>

@@ -9,7 +9,7 @@ pt-BR:
         product_subcategory: 'Subcategoria'
         product_subcategory_id: 'Subcategoria'
         description: 'Descrição'
-        price: 'Preço'
+        price: 'Preço unitário'
         product_condition: 'Condição'
         product_condition_id: 'Condição'
         quantity: 'Quantidade'

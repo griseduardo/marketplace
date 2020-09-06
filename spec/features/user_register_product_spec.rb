@@ -76,7 +76,7 @@ feature 'User register product' do
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Subcategoria é obrigatório(a)')
     expect(page).to have_content('Descrição não pode ficar em branco')
-    expect(page).to have_content('Preço não pode ficar em branco')
+    expect(page).to have_content('Preço unitário não pode ficar em branco')
     expect(page).to have_content('Condição é obrigatório(a)')
     expect(page).to have_content('Quantidade não pode ficar em branco')
     expect(page).to have_content('Imagens não pode ficar em branco')

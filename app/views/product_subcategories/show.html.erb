@@ -1,5 +1,11 @@
 <h1><%= @product_subcategory.name %></h1>
 
+<%= form_with url: search_product_subcategory_path, method: :get, local: true do |f| %>
+  <%= f.label :q, 'Busca de produto' %>
+  <%= f.text_field :q %>
+  <%= f.submit 'Buscar' %>
+<% end %>
+
 <h3>Produtos</h3>
 
 <% @products.each do |product| %>

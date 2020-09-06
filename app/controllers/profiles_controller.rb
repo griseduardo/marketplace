@@ -42,6 +42,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def search
+    @profile = Profile.find(params[:id])
+    @product_subcategories = ProductSubcategory.where('name LIKE ?', "%#{params[:q]}%")
+    @products = Product.where(profile: @profile).where('name LIKE ?', "%#{params[:q]}%")
+                .or(Product.where(profile: @profile, product_subcategory: @product_subcategories))
+                .or(Product.where(profile: @profile).where('description LIKE ?', "%#{params[:q]}%"))
+    render :show
+  end
+
   private
 
   def profile_params

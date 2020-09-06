@@ -11,6 +11,12 @@
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2><%= current_user.company.name %></h2>
 
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <%= f.label :q, 'Busca de produto' %>
+    <%= f.text_field :q %>
+    <%= f.submit 'Buscar' %>
+  <% end %>
+  
   <h3>Categorias</h3>
 
   <% @product_categories.each do |product_category| %>
