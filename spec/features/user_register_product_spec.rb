@@ -58,6 +58,7 @@ feature 'User register product' do
     expect(page).to have_content('R$ 240,00')
     expect(page).to have_content('Usado')
     expect(page).to have_content('2')
+    expect(page).to have_content('Disponível')
   end
 
   scenario 'must fill in all fields' do

@@ -21,6 +21,8 @@
   <dd><%= @product.product_condition.name %></dd>
   <dt><%= Product.human_attribute_name(:quantity) %></dt>
   <dd><%= @product.quantity %></dd>
+  <dt><%= Product.human_attribute_name(:status) %></dt>
+  <dd><%= @product.status.capitalize %></dd>
 </dl>
 
 <% @product.images.each do |image| %>

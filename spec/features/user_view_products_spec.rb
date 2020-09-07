@@ -441,7 +441,7 @@ feature 'User view products' do
     expect(page).to have_content('Nenhum produto disponível')
   end
 
-  scenario 'and view details' do
+  scenario 'and view details of available product' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456')
@@ -485,6 +485,57 @@ feature 'User view products' do
     expect(page).to have_content('240')
     expect(page).to have_content('Usado')
     expect(page).to have_content('2')
+    expect(page).to have_content('Disponível')
+    expect(body).to include('fevernova1.jpg')
+    expect(body).to include('fevernova2.jpg')
+    expect(page).not_to have_content('Coxinha de frango')
+  end
+
+  scenario 'and view details of unavailable product' do
+    Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
+    user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
+    user2 = User.create!(email: 'carol@rotes.com', password: '123456')
+    user3 = User.create!(email: 'joicy@rotes.com', password: 'dad456')
+    department = Department.create!(name: 'RH')
+    product_category1 = ProductCategory.create!(name: 'Alimentos')
+    product_condition1 = ProductCondition.create!(name: 'Novo')
+    profile2 = Profile.create!(full_name: 'Edgar Gomes', chosen_name: 'Carol Gomes', birthday: '10/08/1990', 
+                    work_address: 'Avenida Paulista, 170', position: 'Auxiliar', sector: 'Treinamento e desenvolvimento', 
+                    department: department, user: user2)
+    product_category2 = ProductCategory.create!(name: 'Esporte e lazer')
+    product_subcategory2 = ProductSubcategory.create!(name: 'Bola', product_category: product_category2)
+    product_condition2 = ProductCondition.create!(name: 'Usado')
+    product2 = Product.new(name: 'Adidas Fevernova - Bola da copa de 2002', product_subcategory: product_subcategory2, 
+                           description: 'Bola de futebol oficial da Copa do Mundo FIFA de 2002 feita pela Adidas.', price: '240', 
+                           product_condition: product_condition2, quantity: '0', profile: profile2)
+    product2.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'fevernova1.jpg')), filename: 'fevernova1.jpg')
+    product2.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'fevernova2.jpg')), filename: 'fevernova2.jpg')
+    product2.save!
+    profile3 = Profile.create!(full_name: 'Joicy Andrade', birthday: '01/02/1990', 
+                               work_address: 'Avenida Paulista, 170', position: 'Gerente', sector: 'Treinamento e desenvolvimento', 
+                               department: department, user: user3)
+    product_subcategory3 = ProductSubcategory.create!(name: 'Salgado', product_category: product_category1)
+    product3 = Product.new(name: 'Coxinha de frango', product_subcategory: product_subcategory3, 
+                           description: 'Coxinha de frango com bastante recheio', price: '3', product_condition: product_condition1, 
+                           quantity: '1', profile: profile3)
+    product3.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'coxinha1.png')), filename: 'coxinha1.png')
+    product3.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'coxinha2.jpeg')), filename: 'coxinha2.jpeg')
+    product3.save!
+
+    login_as(user1, scope: :user)
+    visit root_path
+    click_on 'Adidas Fevernova - Bola da copa de 2002'
+
+    expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
+    expect(page).to have_content('Carol Gomes')
+    expect(page).to have_content('carol@rotes.com')
+    expect(page).to have_content('RH')
+    expect(page).to have_content('Bola de futebol oficial da Copa do Mundo FIFA de 2002 feita pela Adidas.')
+    expect(page).to have_content('Bola')
+    expect(page).to have_content('240')
+    expect(page).to have_content('Usado')
+    expect(page).to have_content('2')
+    expect(page).to have_content('Indisponível')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
     expect(page).not_to have_content('Coxinha de frango')

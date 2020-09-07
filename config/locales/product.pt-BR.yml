@@ -16,3 +16,4 @@ pt-BR:
         profile: 'Vendedor'
         profile_id: 'Vendedor'
         images: 'Imagens'
+        status: 'Status'
