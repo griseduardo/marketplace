@@ -28,3 +28,32 @@
 <% @product.images.each do |image| %>
   <%= image_tag image %>
 <% end %>
+
+<h2>Perguntas</h2>
+<% @product.questions.each do |question| %>
+  <div>
+    <strong>Nome:</strong>  
+    <%= question.profile.full_name %>
+  </div>
+  <div>
+    <strong>Departamento:</strong> 
+    <%= question.profile.department.name %>
+  </div>
+  <div>
+    <strong>Dúvida:</strong> 
+    <%= question.question_message %>
+  </div>
+<% end %>
+
+<% if @product.profile.user != current_user %>
+  <h2>Adicionar pergunta:</h2>
+  <%= form_with(model: [ @product, @product.questions.build ], local: true) do |f| %>
+    <p>
+      <%= f.label :question_message %>
+      <%= f.text_field :question_message %>
+    </p>
+    <p>
+      <%= f.submit 'Enviar pergunta' %>
+    </p>
+  <% end %>
+<% end %>

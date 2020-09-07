@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :product_subcategory
   belongs_to :product_condition
   belongs_to :profile
+  has_many :questions
   has_many_attached :images
 
   enum status: { disponível: 0, indisponível:10, suspenso: 20 }

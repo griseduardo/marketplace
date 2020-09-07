@@ -37,7 +37,7 @@ feature 'User view products' do
     expect(current_path).to eq new_user_session_path
   end
 
-  scenario 'succesfully the first image of each product in home page (same company, others users)' do
+  scenario 'successfully the first image of each product in home page (same company, others users)' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456')
@@ -102,7 +102,7 @@ feature 'User view products' do
     expect(page).to have_content('Nenhum produto disponível')
   end
 
-  scenario 'succesfully the first image of each product for a specific category (same company, others users)' do
+  scenario 'successfully the first image of each product for a specific category (same company, others users)' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456')
@@ -198,7 +198,7 @@ feature 'User view products' do
     expect(page).to have_content('Nenhum produto disponível')
   end
 
-  scenario 'succesfully the first image of each product for a specific subcategory (same company, others users)' do
+  scenario 'successfully the first image of each product for a specific subcategory (same company, others users)' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456')
@@ -297,7 +297,7 @@ feature 'User view products' do
     expect(page).to have_content('Nenhum produto disponível')
   end
 
-  scenario 'succesfully the first image of each product for a specific profile (same company, other user)' do
+  scenario 'successfully the first image of each product for a specific profile (same company, other user)' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456')
@@ -385,7 +385,7 @@ feature 'User view products' do
     expect(page).to have_content('Nenhum produto disponível')
   end
  
-  scenario 'succesfully the first image of each product for own profile' do
+  scenario 'successfully the first image of each product for own profile' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
     user2 = User.create!(email: 'carol@rotes.com', password: '123456') 
