@@ -32,8 +32,13 @@
 <h2>Perguntas</h2>
 <% @product.questions.each do |question| %>
   <div>
-    <strong>Nome:</strong>  
-    <%= question.profile.full_name %>
+    <h3>Pergunta</h3>
+    <strong>Nome:</strong>
+    <% if question.profile.chosen_name.blank? %>
+      <%= question.profile.full_name %>  
+    <% else %>  
+      <%= question.profile.chosen_name %>
+    <% end %>
   </div>
   <div>
     <strong>Departamento:</strong> 
@@ -43,6 +48,26 @@
     <strong>Dúvida:</strong> 
     <%= question.question_message %>
   </div>
+
+  <% if question.answer %>
+    <div>
+      <h3>Resposta</h3>
+      <strong>Nome:</strong>
+      <% if @product.profile.chosen_name.blank? %>
+        <%= @product.profile.full_name %>  
+      <% else %>  
+        <%= @product.profile.chosen_name %>
+      <% end %>
+    </div>
+    <div>
+      <strong>Departamento:</strong> 
+      <%= @product.profile.department.name %>
+    </div>
+    <div>
+      <strong>Resposta:</strong> 
+      <%= question.answer.answer_message %>
+    </div>  
+  <% end %>
 <% end %>
 
 <% if @product.profile.user != current_user %>
@@ -54,6 +79,23 @@
     </p>
     <p>
       <%= f.submit 'Enviar pergunta' %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @product.profile.user == current_user && @questions.present? %>
+  <h2>Adicionar resposta:</h2>
+  <%= form_with(model: [ @product, @answer], local: true) do |f| %>
+    <p>
+      <%= f.label :question_id, 'Pergunta realizada' %>
+      <%= f.collection_select :question_id, @questions, :id, :question_message %>
+    </p>
+    <p>
+      <%= f.label :answer_message, 'Resposta' %>
+      <%= f.text_field :answer_message %>
+    </p>
+    <p>
+      <%= f.submit 'Enviar resposta' %>
     </p>
   <% end %>
 <% end %>

@@ -14,6 +14,6 @@ class QuestionsController < ApplicationController
   
   private
     def question_params
-      params.require(:question).permit(:question_message)
+      params.require(:question).permit(:question_message, :product_id)
     end
 end

@@ -8,6 +8,8 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    @questions = Question.where(product: @product)
+    @answer = Answer.new
   end
 
   def new
