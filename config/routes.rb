@@ -17,5 +17,8 @@ Rails.application.routes.draw do
     resources :purchased_products, only: [:show, :new, :create]
   end
   resources :questions 
+  resources :purchased_products, only: [] do
+    get 'sell', on: :collection
+  end
   get '/search', to: 'home#search'  
 end

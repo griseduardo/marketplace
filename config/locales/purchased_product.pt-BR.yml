@@ -6,3 +6,14 @@ pt-BR:
     attributes:
       purchased_product:
         total_quantity: 'Quantidade total'
+        product: 'Produto'
+        product_id: 'Produto'
+        profile: 'Comprador'
+        profile_id: 'Comprador'
+        start_date: 'Data de início'
+        end_date: 'Data de conclusão'
+        final_value: 'Valor da compra'
+        status: 'Status'
+        initial_value: 'Base de valor'
+        freight_cost: 'Frete'
+        discount: 'Desconto'

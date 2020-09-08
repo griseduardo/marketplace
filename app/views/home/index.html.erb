@@ -1,3 +1,12 @@
+<% if @purchased_products.present? %>
+  <% @purchased_products.each do |purchased_product| %>
+    <% if purchased_product.status == 'iniciada' && purchased_product.product.profile == current_user.profile %>
+      <h4>Venda aguardando confirmação:</h4>
+      <%= purchased_product.product.name %>    
+    <% end %>
+  <% end %>
+<% end %>
+
 <h1>MarketPlace</h1>
 
 <% if user_signed_in? %>
@@ -8,6 +17,7 @@
   <% end %>
   <%= link_to 'Cadastrar produto', new_product_path %>
   <%= link_to 'Meus produtos', products_path %>
+  <%= link_to 'Gerenciar vendas', sell_purchased_products_path %>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2><%= current_user.company.name %></h2>
 

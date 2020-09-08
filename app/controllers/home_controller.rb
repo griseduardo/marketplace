@@ -6,6 +6,7 @@ class HomeController < ApplicationController
       @users = User.where(company: current_user.company)
       @profiles = Profile.where(user: @users)
       @products = Product.where(profile: @profiles)
+      @purchased_products = PurchasedProduct.where(profile: @profiles)
     else
       @product_categories = ProductCategory.order(:name)  
     end

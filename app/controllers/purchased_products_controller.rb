@@ -1,4 +1,11 @@
 class PurchasedProductsController < ApplicationController
+  def sell
+    @user = current_user
+    @profile = Profile.find_by(user: @user)
+    @products = Product.where(profile: @profile)
+    @purchased_products = PurchasedProduct.where(product: @products)
+  end
+
   def create
     if current_user.profile.blank?
       redirect_to new_profile_path, notice: 'Necessário cadastrar perfil!'

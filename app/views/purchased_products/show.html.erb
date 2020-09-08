@@ -1,10 +1,25 @@
-<% if @purchased_product.status == 'iniciada' && @purchased_product.profile.user == @product.profile.user %>
+<% if @purchased_product.status == 'iniciada' && current_user == @product.profile.user %>
   <h2>Aprovar venda</h2>
 <% end %>
 
-<% if @purchased_product.status == 'iniciada' && @purchased_product.profile.user != @product.profile.user %>
+<% if @purchased_product.status == 'iniciada' && current_user != @product.profile.user %>
   <h2>Aguardando aprovação do vendedor</h2>
 <% end %>
+
+<dl>
+  <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
+  <% if @purchased_product.profile.chosen_name.present? %>
+    <dd><%= @purchased_product.profile.chosen_name %></dd>
+  <% else %>
+    <dd><%= @purchased_product.profile.full_name %></dd>
+  <% end %>
+  <dt><%= PurchasedProduct.human_attribute_name(:total_quantity) %></dt>
+  <dd><%= @purchased_product.total_quantity %></dd>
+  <dt><%= PurchasedProduct.human_attribute_name(:initial_value) %></dt>
+  <dd><%= number_to_currency @purchased_product.initial_value %></dd>
+  <dt><%= PurchasedProduct.human_attribute_name(:start_date) %></dt>
+  <dd><%= l @purchased_product.start_date %></dd>
+</dl>
 
 <h1><%= @product.name %></h1>
 
@@ -25,12 +40,6 @@
   <dd><%= @product.product_subcategory.name %></dd>
   <dt><%= Product.human_attribute_name(:product_condition) %></dt>
   <dd><%= @product.product_condition.name %></dd>
-  <dt><%= PurchasedProduct.human_attribute_name(:total_quantity) %></dt>
-  <dd><%= @purchased_product.total_quantity %></dd>
-  <dt><%= PurchasedProduct.human_attribute_name(:initial_value) %></dt>
-  <dd><%= number_to_currency @purchased_product.initial_value %></dd>
-  <dt><%= PurchasedProduct.human_attribute_name(:start_date) %></dt>
-  <dd><%= @purchased_product.start_date %></dd>
 </dl>
 
 <% @product.images.each do |image| %>
