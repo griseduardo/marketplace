@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show, :new, :create] do
     resources :questions
     resources :answers
+    resources :purchased_products, only: [:show, :new, :create]
   end
   resources :questions 
   get '/search', to: 'home#search'  

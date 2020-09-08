@@ -29,6 +29,19 @@
   <%= image_tag image %>
 <% end %>
 
+<% if @product.profile.user != current_user %>
+  <h2>Efetuar compra</h2>
+  <%= form_with(model: [ @product, @product.purchased_products.build ], local: true) do |f| %>
+    <p>
+      <%= f.label :total_quantity %>
+      <%= f.number_field :total_quantity, max: @product.quantity, min: 1 %>
+    </p>
+    <p>
+      <%= f.submit 'Comprar' %>
+    </p>
+  <% end %>
+<% end %>
+
 <h2>Perguntas</h2>
 <% @product.questions.each do |question| %>
   <div>

@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   belongs_to :profile
   has_many :questions
   has_many :answers
+  has_many :purchased_products
   has_many_attached :images
 
   enum status: { disponível: 0, indisponível:10, suspenso: 20 }
@@ -13,6 +14,8 @@ class Product < ApplicationRecord
   validates_numericality_of :quantity, greater_than_or_equal_to: 0
 
   before_validation :add_status
+
+  private
 
   def add_status
     if quantity.present?

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_200813) do
+ActiveRecord::Schema.define(version: 2020_09_08_132000) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -107,6 +107,23 @@ ActiveRecord::Schema.define(version: 2020_09_07_200813) do
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
+  create_table "purchased_products", force: :cascade do |t|
+    t.integer "product_id", null: false
+    t.integer "profile_id", null: false
+    t.integer "total_quantity"
+    t.date "start_date"
+    t.date "end_date"
+    t.float "final_value"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.float "initial_value"
+    t.float "freight_cost"
+    t.float "discount"
+    t.index ["product_id"], name: "index_purchased_products_on_product_id"
+    t.index ["profile_id"], name: "index_purchased_products_on_profile_id"
+  end
+
   create_table "questions", force: :cascade do |t|
     t.integer "product_id", null: false
     t.integer "profile_id", null: false
@@ -139,6 +156,8 @@ ActiveRecord::Schema.define(version: 2020_09_07_200813) do
   add_foreign_key "products", "profiles"
   add_foreign_key "profiles", "departments"
   add_foreign_key "profiles", "users"
+  add_foreign_key "purchased_products", "products"
+  add_foreign_key "purchased_products", "profiles"
   add_foreign_key "questions", "products"
   add_foreign_key "questions", "profiles"
 end

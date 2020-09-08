@@ -1,0 +1,8 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      purchased_product: 'Produto comprado'
+    attributes:
+      purchased_product:
+        total_quantity: 'Quantidade total'
