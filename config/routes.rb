@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :purchased_products, only: [:show, :new, :create] do
       post 'refuse', on: :member
       post 'confirm', on: :member
+      post 'cancel', on: :member
     end
   end
   resources :questions 

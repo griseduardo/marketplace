@@ -61,6 +61,17 @@ class PurchasedProductsController < ApplicationController
     redirect_to product_purchased_product_path(@product, @purchased_product)
   end
 
+  def cancel
+    @product = Product.find(params[:product_id])
+    @purchased_product = PurchasedProduct.find(params[:id])
+    @purchased_product.cancelada!
+    @purchased_product.end_date = Date.current
+    @purchased_product.save
+    @product.quantity = @product.quantity + @purchased_product.total_quantity
+    @product.save
+    redirect_to product_purchased_product_path(@product, @purchased_product)  
+  end
+
   private
   def purchased_product_params
     params.require(:purchased_product)
