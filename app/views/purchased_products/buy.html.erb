@@ -35,4 +35,21 @@
       </dl>          
     <% end %>
   <% end %>
+  <h2>Compras em negociação</h2>
+  <% @purchased_products.each do |purchased_product| %>
+    <% if purchased_product.andamento? %>
+      <dl>
+        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
+        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
+        <dt>Vendedor</dt>
+        <dd>
+          <% if purchased_product.product.profile.chosen_name.present? %>
+            <%= purchased_product.product.profile.chosen_name %>
+          <% else %>
+            <%= purchased_product.product.profile.full_name %>    
+          <% end %>
+        </dd>
+      </dl>          
+    <% end %>
+  <% end %>
 <% end %>
