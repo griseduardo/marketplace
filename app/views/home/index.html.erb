@@ -4,6 +4,10 @@
       <h4>Venda aguardando confirmação:</h4>
       <%= purchased_product.product.name %>    
     <% end %>
+    <% if purchased_product.status == 'iniciada' && purchased_product.profile == current_user.profile %>
+      <h4>Compra aguardando confirmação do vendedor:</h4>
+      <%= purchased_product.product.name %>    
+    <% end %>
   <% end %>
 <% end %>
 
@@ -17,7 +21,8 @@
   <% end %>
   <%= link_to 'Cadastrar produto', new_product_path %>
   <%= link_to 'Meus produtos', products_path %>
-  <%= link_to 'Gerenciar vendas', sell_purchased_products_path %>
+  <%= link_to 'Vendas', sell_purchased_products_path %>
+  <%= link_to 'Compras', buy_purchased_products_path %>
   <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
   <h2><%= current_user.company.name %></h2>
 

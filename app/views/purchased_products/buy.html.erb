@@ -1,0 +1,21 @@
+<h1>Compras</h1>
+
+<% if @purchased_products.present? %>
+  <h2>Compras aguardando confirmação do vendedor</h2>
+  <% @purchased_products.each do |purchased_product| %>
+    <% if purchased_product.status == 'iniciada' %>
+      <dl>
+        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
+        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
+        <dt>Vendedor</dt>
+        <dd>
+          <% if purchased_product.product.profile.chosen_name.present? %>
+            <%= purchased_product.product.profile.chosen_name %>
+          <% else %>
+            <%= purchased_product.product.profile.full_name %>    
+          <% end %>
+        </dd>
+      </dl>          
+    <% end %>
+  <% end %>
+<% end %>

@@ -6,6 +6,12 @@ class PurchasedProductsController < ApplicationController
     @purchased_products = PurchasedProduct.where(product: @products)
   end
 
+  def buy
+    @user = current_user
+    @profile = Profile.find_by(user: @user)
+    @purchased_products = PurchasedProduct.where(profile: @profile)
+  end
+
   def create
     if current_user.profile.blank?
       redirect_to new_profile_path, notice: 'Necessário cadastrar perfil!'
