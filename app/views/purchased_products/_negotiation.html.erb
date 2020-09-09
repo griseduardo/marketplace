@@ -1,0 +1,19 @@
+<h2>Negociação</h2>
+  <% @purchased_product.negotiations.each do |negotiation| %>
+    <div>
+      <strong>Nome:</strong>
+      <% if negotiation.profile.chosen_name.blank? %>
+        <%= negotiation.profile.full_name %>  
+      <% else %>  
+        <%= negotiation.profile.chosen_name %>
+      <% end %>
+    </div>
+    <div>
+      <strong>Departamento:</strong> 
+      <%= negotiation.profile.department.name %>
+    </div>
+    <div>
+      <strong>Mensagem:</strong> 
+      <%= negotiation.negotiation_message %>
+    </div>
+  <% end %>

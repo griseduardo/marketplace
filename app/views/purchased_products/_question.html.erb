@@ -1,0 +1,42 @@
+<h2>Dúvidas e respostas</h2>
+  <% @purchased_product.product.questions.each do |question| %>
+    <% if question.profile == @purchased_product.profile %>
+      <div>
+        <h3>Pergunta</h3>
+        <strong>Nome:</strong>
+        <% if question.profile.chosen_name.blank? %>
+          <%= question.profile.full_name %>  
+        <% else %>  
+          <%= question.profile.chosen_name %>
+        <% end %>
+      </div>
+      <div>
+        <strong>Departamento:</strong> 
+        <%= question.profile.department.name %>
+      </div>
+      <div>
+        <strong>Dúvida:</strong> 
+        <%= question.question_message %>
+      </div>
+
+      <% if question.answer %>
+        <div>
+          <h3>Resposta</h3>
+          <strong>Nome:</strong>
+          <% if @product.profile.chosen_name.blank? %>
+            <%= @product.profile.full_name %>  
+          <% else %>  
+            <%= @product.profile.chosen_name %>
+          <% end %>
+        </div>
+        <div>
+          <strong>Departamento:</strong> 
+          <%= @product.profile.department.name %>
+        </div>
+        <div>
+          <strong>Resposta:</strong> 
+          <%= question.answer.answer_message %>
+        </div>
+      <% end %>      
+    <% end %>
+  <% end %>  

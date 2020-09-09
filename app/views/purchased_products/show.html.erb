@@ -16,25 +16,8 @@
 </dl>
 
 <% if @purchased_product.andamento? %>
-  <h2>Negociação</h2>
-  <% @purchased_product.negotiations.each do |negotiation| %>
-    <div>
-      <strong>Nome:</strong>
-      <% if negotiation.profile.chosen_name.blank? %>
-        <%= negotiation.profile.full_name %>  
-      <% else %>  
-        <%= negotiation.profile.chosen_name %>
-      <% end %>
-    </div>
-    <div>
-      <strong>Departamento:</strong> 
-      <%= negotiation.profile.department.name %>
-    </div>
-    <div>
-      <strong>Mensagem:</strong> 
-      <%= negotiation.negotiation_message %>
-    </div>
-  <% end %>
+  
+  <%= render 'negotiation' %>
 
   <h2>Enviar mensagem:</h2>
   <%= form_with(model: [ @purchased_product, @purchased_product.negotiations.build ], local: true) do |f| %>
@@ -48,112 +31,28 @@
   <% end %>
 <% end %>
 
-<% if @purchased_product.iniciada? && current_user == @product.profile.user %>
-  <h2>Aprovar venda</h2>
-  <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
-  <%= link_to 'Confirmar venda', confirm_product_purchased_product_path(@product, @purchased_product), method: :post %>
+<% if @purchased_product.iniciada? %>
+  <% if current_user == @product.profile.user  %>
+    <h2>Aprovar venda</h2>
+    <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
+    <%= link_to 'Confirmar venda', confirm_product_purchased_product_path(@product, @purchased_product), method: :post %>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user  %>
+    <h2>Aguardando aprovação do vendedor</h2>
+  <% end %>
 <% end %>
 
-<% if @purchased_product.iniciada? && current_user != @product.profile.user %>
-  <h2>Aguardando aprovação do vendedor</h2>
-<% end %>
+<% if @purchased_product.recusada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda recusada</h2>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user %>
+    <h2>Compra recusada</h2>
+  <% end %>
+  
+  <%= render 'end_date' %>
 
-<% if @purchased_product.recusada? && current_user == @product.profile.user %>
-  <h2>Venda recusada</h2>
-  <%= PurchasedProduct.human_attribute_name(:end_date) %>
-  <%= l @purchased_product.end_date %>
-
-  <h2>Dúvidas e respostas</h2>
-  <% @purchased_product.product.questions.each do |question| %>
-    <% if question.profile == @purchased_product.profile %>
-      <div>
-        <h3>Pergunta</h3>
-        <strong>Nome:</strong>
-        <% if question.profile.chosen_name.blank? %>
-          <%= question.profile.full_name %>  
-        <% else %>  
-          <%= question.profile.chosen_name %>
-        <% end %>
-      </div>
-      <div>
-        <strong>Departamento:</strong> 
-        <%= question.profile.department.name %>
-      </div>
-      <div>
-        <strong>Dúvida:</strong> 
-        <%= question.question_message %>
-      </div>
-
-      <% if question.answer %>
-        <div>
-          <h3>Resposta</h3>
-          <strong>Nome:</strong>
-          <% if @product.profile.chosen_name.blank? %>
-            <%= @product.profile.full_name %>  
-          <% else %>  
-            <%= @product.profile.chosen_name %>
-          <% end %>
-        </div>
-        <div>
-          <strong>Departamento:</strong> 
-          <%= @product.profile.department.name %>
-        </div>
-        <div>
-          <strong>Resposta:</strong> 
-          <%= question.answer.answer_message %>
-        </div>
-      <% end %>      
-    <% end %>
-  <% end %>  
-<% end %>
-
-<% if @purchased_product.recusada? && current_user != @product.profile.user %>
-  <h2>Compra recusada</h2>
-  <%= PurchasedProduct.human_attribute_name(:end_date) %>
-  <%= l @purchased_product.end_date %>
-
-  <h2>Dúvidas e respostas</h2>
-  <% @purchased_product.product.questions.each do |question| %>
-    <% if question.profile == @purchased_product.profile %>
-      <div>
-        <h3>Pergunta</h3>
-        <strong>Nome:</strong>
-        <% if question.profile.chosen_name.blank? %>
-          <%= question.profile.full_name %>  
-        <% else %>  
-          <%= question.profile.chosen_name %>
-        <% end %>
-      </div>
-      <div>
-        <strong>Departamento:</strong> 
-        <%= question.profile.department.name %>
-      </div>
-      <div>
-        <strong>Dúvida:</strong> 
-        <%= question.question_message %>
-      </div>
-
-      <% if question.answer %>
-        <div>
-          <h3>Resposta</h3>
-          <strong>Nome:</strong>
-          <% if @product.profile.chosen_name.blank? %>
-            <%= @product.profile.full_name %>  
-          <% else %>  
-            <%= @product.profile.chosen_name %>
-          <% end %>
-        </div>
-        <div>
-          <strong>Departamento:</strong> 
-          <%= @product.profile.department.name %>
-        </div>
-        <div>
-          <strong>Resposta:</strong> 
-          <%= question.answer.answer_message %>
-        </div>
-      <% end %>      
-    <% end %>
-  <% end %>  
+  <%= render 'question' %>
 <% end %>
 
 <% if @purchased_product.andamento? && current_user == @product.profile.user %>
@@ -161,142 +60,19 @@
   <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
 <% end %>
 
-<% if @purchased_product.cancelada? && current_user == @product.profile.user %>
-  <h2>Venda cancelada</h2>
-  <%= PurchasedProduct.human_attribute_name(:end_date) %>
-  <%= l @purchased_product.end_date %>
-
-  <h2>Negociação</h2>
-  <% @purchased_product.negotiations.each do |negotiation| %>
-    <div>
-      <strong>Nome:</strong>
-      <% if negotiation.profile.chosen_name.blank? %>
-        <%= negotiation.profile.full_name %>  
-      <% else %>  
-        <%= negotiation.profile.chosen_name %>
-      <% end %>
-    </div>
-    <div>
-      <strong>Departamento:</strong> 
-      <%= negotiation.profile.department.name %>
-    </div>
-    <div>
-      <strong>Mensagem:</strong> 
-      <%= negotiation.negotiation_message %>
-    </div>
+<% if @purchased_product.cancelada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda cancelada</h2>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user %>
+    <h2>Compra cancelada</h2>
   <% end %>
 
-  <h2>Dúvidas e respostas</h2>
-  <% @purchased_product.product.questions.each do |question| %>
-    <% if question.profile == @purchased_product.profile %>
-      <div>
-        <h3>Pergunta</h3>
-        <strong>Nome:</strong>
-        <% if question.profile.chosen_name.blank? %>
-          <%= question.profile.full_name %>  
-        <% else %>  
-          <%= question.profile.chosen_name %>
-        <% end %>
-      </div>
-      <div>
-        <strong>Departamento:</strong> 
-        <%= question.profile.department.name %>
-      </div>
-      <div>
-        <strong>Dúvida:</strong> 
-        <%= question.question_message %>
-      </div>
+  <%= render 'end_date' %>
 
-      <% if question.answer %>
-        <div>
-          <h3>Resposta</h3>
-          <strong>Nome:</strong>
-          <% if @product.profile.chosen_name.blank? %>
-            <%= @product.profile.full_name %>  
-          <% else %>  
-            <%= @product.profile.chosen_name %>
-          <% end %>
-        </div>
-        <div>
-          <strong>Departamento:</strong> 
-          <%= @product.profile.department.name %>
-        </div>
-        <div>
-          <strong>Resposta:</strong> 
-          <%= question.answer.answer_message %>
-        </div>
-      <% end %>      
-    <% end %>
-  <% end %>
-<% end %>
+  <%= render 'negotiation' %>
 
-<% if @purchased_product.cancelada? && current_user != @product.profile.user %>
-  <h2>Compra cancelada</h2>
-  <%= PurchasedProduct.human_attribute_name(:end_date) %>
-  <%= l @purchased_product.end_date %>
-
-  <h2>Negociação</h2>
-  <% @purchased_product.negotiations.each do |negotiation| %>
-    <div>
-      <strong>Nome:</strong>
-      <% if negotiation.profile.chosen_name.blank? %>
-        <%= negotiation.profile.full_name %>  
-      <% else %>  
-        <%= negotiation.profile.chosen_name %>
-      <% end %>
-    </div>
-    <div>
-      <strong>Departamento:</strong> 
-      <%= negotiation.profile.department.name %>
-    </div>
-    <div>
-      <strong>Mensagem:</strong> 
-      <%= negotiation.negotiation_message %>
-    </div>
-  <% end %>
-
-  <h2>Dúvidas e respostas</h2>
-  <% @purchased_product.product.questions.each do |question| %>
-    <% if question.profile == @purchased_product.profile %>
-      <div>
-        <h3>Pergunta</h3>
-        <strong>Nome:</strong>
-        <% if question.profile.chosen_name.blank? %>
-          <%= question.profile.full_name %>  
-        <% else %>  
-          <%= question.profile.chosen_name %>
-        <% end %>
-      </div>
-      <div>
-        <strong>Departamento:</strong> 
-        <%= question.profile.department.name %>
-      </div>
-      <div>
-        <strong>Dúvida:</strong> 
-        <%= question.question_message %>
-      </div>
-
-      <% if question.answer %>
-        <div>
-          <h3>Resposta</h3>
-          <strong>Nome:</strong>
-          <% if @product.profile.chosen_name.blank? %>
-            <%= @product.profile.full_name %>  
-          <% else %>  
-            <%= @product.profile.chosen_name %>
-          <% end %>
-        </div>
-        <div>
-          <strong>Departamento:</strong> 
-          <%= @product.profile.department.name %>
-        </div>
-        <div>
-          <strong>Resposta:</strong> 
-          <%= question.answer.answer_message %>
-        </div>
-      <% end %>      
-    <% end %>
-  <% end %>
+  <%= render 'question' %>
 <% end %>
 
 <h1><%= @product.name %></h1>
