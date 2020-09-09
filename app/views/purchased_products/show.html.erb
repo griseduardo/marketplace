@@ -1,17 +1,4 @@
-<% if @purchased_product.status == 'iniciada' && current_user == @product.profile.user %>
-  <h2>Aprovar venda</h2>
-  <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
-<% end %>
-
-<% if @purchased_product.status == 'iniciada' && current_user != @product.profile.user %>
-  <h2>Aguardando aprovação do vendedor</h2>
-<% end %>
-
-<% if @purchased_product.recusada? && current_user == @product.profile.user %>
-  <h2>Venda recusada</h2>
-  <%= PurchasedProduct.human_attribute_name(:end_date) %>
-  <%= l @purchased_product.end_date %>
-<% end %>
+<h1>Dados da negociação</h1>
 
 <dl>
   <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
@@ -27,6 +14,113 @@
   <dt><%= PurchasedProduct.human_attribute_name(:start_date) %></dt>
   <dd><%= l @purchased_product.start_date %></dd>
 </dl>
+
+<% if @purchased_product.iniciada? && current_user == @product.profile.user %>
+  <h2>Aprovar venda</h2>
+  <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
+<% end %>
+
+<% if @purchased_product.iniciada? && current_user != @product.profile.user %>
+  <h2>Aguardando aprovação do vendedor</h2>
+<% end %>
+
+<% if @purchased_product.recusada? && current_user == @product.profile.user %>
+  <h2>Venda recusada</h2>
+  <%= PurchasedProduct.human_attribute_name(:end_date) %>
+  <%= l @purchased_product.end_date %>
+
+  <h2>Dúvidas e respostas</h2>
+  <% @purchased_product.product.questions.each do |question| %>
+    <% if question.profile == @purchased_product.profile %>
+      <div>
+        <h3>Pergunta</h3>
+        <strong>Nome:</strong>
+        <% if question.profile.chosen_name.blank? %>
+          <%= question.profile.full_name %>  
+        <% else %>  
+          <%= question.profile.chosen_name %>
+        <% end %>
+      </div>
+      <div>
+        <strong>Departamento:</strong> 
+        <%= question.profile.department.name %>
+      </div>
+      <div>
+        <strong>Dúvida:</strong> 
+        <%= question.question_message %>
+      </div>
+
+      <% if question.answer %>
+        <div>
+          <h3>Resposta</h3>
+          <strong>Nome:</strong>
+          <% if @product.profile.chosen_name.blank? %>
+            <%= @product.profile.full_name %>  
+          <% else %>  
+            <%= @product.profile.chosen_name %>
+          <% end %>
+        </div>
+        <div>
+          <strong>Departamento:</strong> 
+          <%= @product.profile.department.name %>
+        </div>
+        <div>
+          <strong>Resposta:</strong> 
+          <%= question.answer.answer_message %>
+        </div>
+      <% end %>      
+    <% end %>
+  <% end %>  
+<% end %>
+
+<% if @purchased_product.recusada? && current_user != @product.profile.user %>
+  <h2>Compra recusada</h2>
+  <%= PurchasedProduct.human_attribute_name(:end_date) %>
+  <%= l @purchased_product.end_date %>
+
+  <h2>Dúvidas e respostas</h2>
+  <% @purchased_product.product.questions.each do |question| %>
+    <% if question.profile == @purchased_product.profile %>
+      <div>
+        <h3>Pergunta</h3>
+        <strong>Nome:</strong>
+        <% if question.profile.chosen_name.blank? %>
+          <%= question.profile.full_name %>  
+        <% else %>  
+          <%= question.profile.chosen_name %>
+        <% end %>
+      </div>
+      <div>
+        <strong>Departamento:</strong> 
+        <%= question.profile.department.name %>
+      </div>
+      <div>
+        <strong>Dúvida:</strong> 
+        <%= question.question_message %>
+      </div>
+
+      <% if question.answer %>
+        <div>
+          <h3>Resposta</h3>
+          <strong>Nome:</strong>
+          <% if @product.profile.chosen_name.blank? %>
+            <%= @product.profile.full_name %>  
+          <% else %>  
+            <%= @product.profile.chosen_name %>
+          <% end %>
+        </div>
+        <div>
+          <strong>Departamento:</strong> 
+          <%= @product.profile.department.name %>
+        </div>
+        <div>
+          <strong>Resposta:</strong> 
+          <%= question.answer.answer_message %>
+        </div>
+      <% end %>      
+    <% end %>
+  <% end %>  
+<% end %>
 
 <h1><%= @product.name %></h1>
 

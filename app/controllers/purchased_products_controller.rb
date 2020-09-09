@@ -49,6 +49,7 @@ class PurchasedProductsController < ApplicationController
     @purchased_product.end_date = Date.current
     @purchased_product.save
     @product.quantity = @product.quantity + @purchased_product.total_quantity
+    @product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)
   end
 
