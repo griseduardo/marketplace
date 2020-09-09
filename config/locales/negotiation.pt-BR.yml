@@ -1,0 +1,12 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      negotiation: 'Negociação'
+    attributes:
+      negotiation:
+        profile: 'Perfil'
+        profile_id: 'Perfil'
+        negotiation_message: 'Mensagem'  
+        purchased_product: 'Produto comprado'
+        purchased_product_id: 'Produto comprado'

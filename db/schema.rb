@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_132000) do
+ActiveRecord::Schema.define(version: 2020_09_09_122527) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 2020_09_08_132000) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "negotiations", force: :cascade do |t|
+    t.text "negotiation_message"
+    t.integer "profile_id", null: false
+    t.integer "purchased_product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_negotiations_on_profile_id"
+    t.index ["purchased_product_id"], name: "index_negotiations_on_purchased_product_id"
   end
 
   create_table "product_categories", force: :cascade do |t|
@@ -150,6 +160,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_132000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "answers", "questions"
+  add_foreign_key "negotiations", "profiles"
+  add_foreign_key "negotiations", "purchased_products"
   add_foreign_key "product_subcategories", "product_categories"
   add_foreign_key "products", "product_conditions"
   add_foreign_key "products", "product_subcategories"

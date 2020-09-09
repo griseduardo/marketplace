@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
   resources :questions 
   resources :purchased_products, only: [] do
+    resources :negotiations
     get 'sell', on: :collection
     get 'buy', on: :collection
   end

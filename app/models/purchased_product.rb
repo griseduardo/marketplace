@@ -1,6 +1,7 @@
 class PurchasedProduct < ApplicationRecord
   belongs_to :product
   belongs_to :profile
+  has_many :negotiations
 
   validates :total_quantity, :initial_value, presence: true
   validates_numericality_of :total_quantity, greater_than: 0
