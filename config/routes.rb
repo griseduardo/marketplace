@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       post 'refuse', on: :member
       post 'confirm', on: :member
       post 'cancel', on: :member
+      post 'conclude', on: :member
     end
   end
   resources :questions 

@@ -72,9 +72,21 @@ class PurchasedProductsController < ApplicationController
     redirect_to product_purchased_product_path(@product, @purchased_product)  
   end
 
+  def conclude
+    @product = Product.find(params[:product_id])
+    @purchased_product = PurchasedProduct.find(params[:id])
+    @purchased_product.update(purchased_product_params)
+    @purchased_product.finalizada!
+    @purchased_product.end_date = Date.current
+    @purchased_product.calculate_value
+    @purchased_product.save
+    redirect_to product_purchased_product_path(@product, @purchased_product)
+  end
+
   private
   def purchased_product_params
     params.require(:purchased_product)
-          .permit(:product_id, :profile_id, :total_quantity, :start_date, :end_date, :final_value, :status)
+          .permit(:product_id, :profile_id, :total_quantity, :start_date, 
+                  :end_date, :final_value, :status, :freight_cost, :discount)
   end
 end

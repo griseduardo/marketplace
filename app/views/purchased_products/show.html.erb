@@ -56,8 +56,22 @@
 <% end %>
 
 <% if @purchased_product.andamento? && current_user == @product.profile.user %>
-  <h2>Finalizar venda</h2>
+  <h2>Cancelar venda</h2>
   <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
+  <h2>Concluir venda</h2>
+  <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
+    <p>
+      <%= f.label :freight_cost %>
+      <%= f.number_field :freight_cost %>
+    </p>
+    <p>
+      <%= f.label :discount %>
+      <%= f.number_field :discount %>
+    </p>
+    <p>
+      <%= f.submit 'Concluir venda' %>
+    </p>
+  <% end %>
 <% end %>
 
 <% if @purchased_product.cancelada? %>
@@ -73,6 +87,17 @@
   <%= render 'negotiation' %>
 
   <%= render 'question' %>
+<% end %>
+
+<% if @purchased_product.finalizada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda concluída</h2>
+  <% end %>
+
+  <%= render 'end_date' %>
+
+  <%= PurchasedProduct.human_attribute_name(:final_value) %>
+  <%= number_to_currency @purchased_product.final_value %>
 <% end %>
 
 <h1><%= @product.name %></h1>

@@ -14,6 +14,10 @@ class PurchasedProduct < ApplicationRecord
     self.initial_value = total_quantity * product.price
   end
 
+  def calculate_value
+    self.final_value = initial_value + freight_cost - discount
+  end
+
   private
 
   def total_quantity_must_be_greather_than_or_equal_to_disponible_quantity
