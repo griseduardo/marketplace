@@ -53,6 +53,14 @@ class PurchasedProductsController < ApplicationController
     redirect_to product_purchased_product_path(@product, @purchased_product)
   end
 
+  def confirm
+    @product = Product.find(params[:product_id])
+    @purchased_product = PurchasedProduct.find(params[:id])
+    @purchased_product.andamento!
+    @purchased_product.save
+    redirect_to product_purchased_product_path(@product, @purchased_product)
+  end
+
   private
   def purchased_product_params
     params.require(:purchased_product)
