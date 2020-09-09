@@ -1,15 +1,9 @@
 class PurchasedProductsController < ApplicationController
-  def sell
-    @user = current_user
-    @profile = Profile.find_by(user: @user)
-    @products = Product.where(profile: @profile)
-    @purchased_products = PurchasedProduct.where(product: @products)
-  end
+  before_action :authenticate_user!, only: [ :show, :new, :create, :sell, :buy, :refuse ]
 
-  def buy
-    @user = current_user
-    @profile = Profile.find_by(user: @user)
-    @purchased_products = PurchasedProduct.where(profile: @profile)
+  def show
+    @product = Product.find(params[:product_id])
+    @purchased_product = PurchasedProduct.find(params[:id])
   end
 
   def create
@@ -35,9 +29,27 @@ class PurchasedProductsController < ApplicationController
     end
   end
 
-  def show
+  def sell
+    @user = current_user
+    @profile = Profile.find_by(user: @user)
+    @products = Product.where(profile: @profile)
+    @purchased_products = PurchasedProduct.where(product: @products)
+  end
+
+  def buy
+    @user = current_user
+    @profile = Profile.find_by(user: @user)
+    @purchased_products = PurchasedProduct.where(profile: @profile)
+  end
+
+  def refuse
     @product = Product.find(params[:product_id])
     @purchased_product = PurchasedProduct.find(params[:id])
+    @purchased_product.recusada!
+    @purchased_product.end_date = Date.current
+    @purchased_product.save
+    @product.quantity = @product.quantity + @purchased_product.total_quantity
+    redirect_to product_purchased_product_path(@product, @purchased_product)
   end
 
   private

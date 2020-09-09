@@ -5,7 +5,7 @@ class PurchasedProduct < ApplicationRecord
   validates :total_quantity, :initial_value, presence: true
   validates_numericality_of :total_quantity, greater_than: 0
 
-  validate :total_quantity_must_be_greather_than_or_equal_to_disponible_quantity
+  validate :total_quantity_must_be_greather_than_or_equal_to_disponible_quantity, on: :create
 
   enum status: { iniciada: 0, recusada: 10, andamento: 20, finalizada: 30, cancelada: 40}
 

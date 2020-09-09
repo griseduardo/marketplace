@@ -14,7 +14,9 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show, :new, :create] do
     resources :questions
     resources :answers
-    resources :purchased_products, only: [:show, :new, :create]
+    resources :purchased_products, only: [:show, :new, :create] do
+      post 'refuse', on: :member
+    end
   end
   resources :questions 
   resources :purchased_products, only: [] do

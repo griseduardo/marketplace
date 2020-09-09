@@ -1,9 +1,16 @@
 <% if @purchased_product.status == 'iniciada' && current_user == @product.profile.user %>
   <h2>Aprovar venda</h2>
+  <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
 <% end %>
 
 <% if @purchased_product.status == 'iniciada' && current_user != @product.profile.user %>
   <h2>Aguardando aprovação do vendedor</h2>
+<% end %>
+
+<% if @purchased_product.recusada? && current_user == @product.profile.user %>
+  <h2>Venda recusada</h2>
+  <%= PurchasedProduct.human_attribute_name(:end_date) %>
+  <%= l @purchased_product.end_date %>
 <% end %>
 
 <dl>
