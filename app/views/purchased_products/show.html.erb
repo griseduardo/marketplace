@@ -1,4 +1,94 @@
-<h2>Dados da negociação</h2>
+<% @purchased_product.errors.full_messages.each do |message| %>
+  <p><%= message %></p>
+<% end %>
+
+<% if @purchased_product.iniciada? %>
+  <% if current_user == @product.profile.user  %>
+    <h2>Aprovar venda</h2>
+    <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
+    <%= link_to 'Confirmar venda', confirm_product_purchased_product_path(@product, @purchased_product), method: :post %>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user  %>
+    <h2>Aguardando aprovação do vendedor</h2>
+  <% end %>
+<% end %>
+
+<% if @purchased_product.recusada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda recusada</h2>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user %>
+    <h2>Compra recusada</h2>
+  <% end %>
+  
+  <%= render 'end_date' %>
+
+  <%= render 'answer_question' %>
+<% end %>
+
+<% if @purchased_product.andamento? && current_user == @product.profile.user %>
+  <h2>Cancelar venda</h2>
+  <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
+  <h2>Concluir venda</h2>
+  <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
+    <p>
+      <%= f.label :freight_cost %>
+      <%= f.number_field :freight_cost, step: 0.01, min: 0 %>
+    </p>
+    <p>
+      <%= f.label :discount %>
+      <%= f.number_field :discount, step: 0.01, min: 0 %>
+    </p>
+    <p>
+      <%= f.submit 'Concluir venda' %>
+    </p>
+  <% end %>
+<% end %>
+
+<% if @purchased_product.cancelada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda cancelada</h2>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user %>
+    <h2>Compra cancelada</h2>
+  <% end %>
+
+  <%= render 'end_date' %>
+
+  <%= render 'negotiation' %>
+
+  <%= render 'answer_question' %>
+<% end %>
+
+<% if @purchased_product.finalizada? %>
+  <% if current_user == @product.profile.user %>
+    <h2>Venda concluída</h2>
+  <% end %>
+  <% if current_user == @purchased_product.profile.user %>
+    <h2>Compra concluída</h2>
+  <% end %>
+
+  <div><%= render 'end_date' %></div>
+
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:freight_cost) %>
+    <%= number_to_currency @purchased_product.freight_cost %>
+  </div>
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:discount) %>
+    <%= number_to_currency @purchased_product.discount %>
+  </div>
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:final_value) %>
+    <%= number_to_currency @purchased_product.final_value %>
+  </div>
+  
+  <%= render 'negotiation' %>
+
+  <%= render 'answer_question' %>
+<% end %>
+
+<h3>Dados da negociação</h3>
 
 <dl>
   <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
@@ -29,92 +119,6 @@
       <%= f.submit 'Enviar mensagem' %>
     </p>
   <% end %>
-<% end %>
-
-<% if @purchased_product.iniciada? %>
-  <% if current_user == @product.profile.user  %>
-    <h3>Aprovar venda</h3>
-    <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
-    <%= link_to 'Confirmar venda', confirm_product_purchased_product_path(@product, @purchased_product), method: :post %>
-  <% end %>
-  <% if current_user == @purchased_product.profile.user  %>
-    <h3>Aguardando aprovação do vendedor</h3>
-  <% end %>
-<% end %>
-
-<% if @purchased_product.recusada? %>
-  <% if current_user == @product.profile.user %>
-    <h3>Venda recusada</h3>
-  <% end %>
-  <% if current_user == @purchased_product.profile.user %>
-    <h3>Compra recusada</h3>
-  <% end %>
-  
-  <%= render 'end_date' %>
-
-  <%= render 'answer_question' %>
-<% end %>
-
-<% if @purchased_product.andamento? && current_user == @product.profile.user %>
-  <h3>Cancelar venda</h3>
-  <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
-  <h3>Concluir venda</h3>
-  <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
-    <p>
-      <%= f.label :freight_cost %>
-      <%= f.number_field :freight_cost %>
-    </p>
-    <p>
-      <%= f.label :discount %>
-      <%= f.number_field :discount %>
-    </p>
-    <p>
-      <%= f.submit 'Concluir venda' %>
-    </p>
-  <% end %>
-<% end %>
-
-<% if @purchased_product.cancelada? %>
-  <% if current_user == @product.profile.user %>
-    <h3>Venda cancelada</h3>
-  <% end %>
-  <% if current_user == @purchased_product.profile.user %>
-    <h3>Compra cancelada</h3>
-  <% end %>
-
-  <%= render 'end_date' %>
-
-  <%= render 'negotiation' %>
-
-  <%= render 'answer_question' %>
-<% end %>
-
-<% if @purchased_product.finalizada? %>
-  <% if current_user == @product.profile.user %>
-    <h3>Venda concluída</h3>
-  <% end %>
-  <% if current_user == @purchased_product.profile.user %>
-    <h3>Compra concluída</h3>
-  <% end %>
-
-  <div><%= render 'end_date' %></div>
-
-  <div>
-    <%= PurchasedProduct.human_attribute_name(:freight_cost) %>
-    <%= number_to_currency @purchased_product.freight_cost %>
-  </div>
-  <div>
-    <%= PurchasedProduct.human_attribute_name(:discount) %>
-    <%= number_to_currency @purchased_product.discount %>
-  </div>
-  <div>
-    <%= PurchasedProduct.human_attribute_name(:final_value) %>
-    <%= number_to_currency @purchased_product.final_value %>
-  </div>
-  
-  <%= render 'negotiation' %>
-
-  <%= render 'answer_question' %>
 <% end %>
 
 <h1><%= @product.name %></h1>

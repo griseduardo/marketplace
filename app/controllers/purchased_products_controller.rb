@@ -76,11 +76,14 @@ class PurchasedProductsController < ApplicationController
     @product = Product.find(params[:product_id])
     @purchased_product = PurchasedProduct.find(params[:id])
     @purchased_product.update(purchased_product_params)
-    @purchased_product.finalizada!
     @purchased_product.end_date = Date.current
     @purchased_product.calculate_value
-    @purchased_product.save
-    redirect_to product_purchased_product_path(@product, @purchased_product)
+    if @purchased_product.save
+      @purchased_product.finalizada!
+      redirect_to product_purchased_product_path(@product, @purchased_product)
+    else
+      render :show
+    end
   end
 
   private

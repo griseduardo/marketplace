@@ -588,7 +588,7 @@ feature 'User view purchased product' do
     product2.save!
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
-                                                 initial_value: total_quantity * product2.price, start_date: '10/04/2030', end_date: '11/04/2030')
+                                                 initial_value: total_quantity * product2.price, start_date: '10/04/2030')
     purchased_product.andamento!
 
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
@@ -645,7 +645,7 @@ feature 'User view purchased product' do
     product2.save!
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
-                                                 initial_value: total_quantity * product2.price, start_date: '10/04/2030', end_date: '11/04/2030')
+                                                 initial_value: total_quantity * product2.price, start_date: '10/04/2030')
     purchased_product.andamento!
 
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
