@@ -1,33 +1,16 @@
 <h1><%= @product.name %></h1>
 
 <dl>
-  <dt><%= Product.human_attribute_name(:profile) %></dt>
-  <% if @product.profile.chosen_name.present? %>
-    <dd><%= @product.profile.chosen_name %></dd>
-  <% else %>
-    <dd><%= @product.profile.full_name %></dd>
-  <% end %>
-  <dd><%= @product.profile.user.email %></dd>
-  <dd><%= @product.profile.department.name %></dd>
-  <dt><%= Product.human_attribute_name(:description) %></dt>
-  <dd><%= @product.description %></dd>
-  <dt>Categoria</dt>
-  <dd><%= @product.product_subcategory.product_category.name %></dd>
-  <dt><%= Product.human_attribute_name(:product_subcategory) %></dt>
-  <dd><%= @product.product_subcategory.name %></dd>
+  <%= render 'product' %>
   <dt><%= Product.human_attribute_name(:price) %></dt>
   <dd><%= number_to_currency @product.price %></dd>
-  <dt><%= Product.human_attribute_name(:product_condition) %></dt>
-  <dd><%= @product.product_condition.name %></dd>
   <dt><%= Product.human_attribute_name(:quantity) %></dt>
   <dd><%= @product.quantity %></dd>
   <dt><%= Product.human_attribute_name(:status) %></dt>
   <dd><%= @product.status.capitalize %></dd>
 </dl>
 
-<% @product.images.each do |image| %>
-  <%= image_tag image %>
-<% end %>
+<%= render 'image' %>
 
 <% if @product.profile.user != current_user %>
   <h2>Efetuar compra</h2>
