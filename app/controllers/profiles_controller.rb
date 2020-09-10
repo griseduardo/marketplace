@@ -23,7 +23,7 @@ class ProfilesController < ApplicationController
       redirect_to @profile, notice: 'Cadastrado com sucesso!'
     else
       @department = Department.all
-      render :new
+      render :new, layout: false
     end
   end
 

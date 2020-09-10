@@ -19,35 +19,22 @@
   <% end %>
 <% end %>
 
-<h1>MarketPlace</h1>
-
 <% if user_signed_in? %>
-  <% if current_user.profile.blank? %>
-    <%= link_to 'Meu perfil', new_profile_path %>
-  <% else %>
-    <%= link_to 'Meu perfil', edit_profile_path(@profile = current_user.profile) %>
-  <% end %>
-  <%= link_to 'Cadastrar produto', new_product_path %>
-  <%= link_to 'Meus produtos', products_path %>
-  <%= link_to 'Vendas', sell_purchased_products_path %>
-  <%= link_to 'Compras', buy_purchased_products_path %>
-  <%= link_to 'Sair', destroy_user_session_path, method: :delete %>
-  <h2><%= current_user.company.name %></h2>
+ <h2>Categorias</h2>
+  <p>
+    <% @product_categories.each do |product_category| %>
+      <%= link_to product_category.name, product_category %>
+    <% end %>
+  </p>
 
+  <% if @product_categories.empty? %>
+    <div>Nenhuma categoria cadastrada</div>
+  <% end %>
+  
   <%= form_with url: search_path, method: :get, local: true do |f| %>
     <%= f.label :q, 'Busca de produto' %>
     <%= f.text_field :q %>
     <%= f.submit 'Buscar' %>
-  <% end %>
-  
-  <h3>Categorias</h3>
-
-  <% @product_categories.each do |product_category| %>
-    <%= link_to product_category.name, product_category %>
-  <% end %>
-
-  <% if @product_categories.empty? %>
-    <div>Nenhuma categoria cadastrada<div>
   <% end %>
 
   <h3><%= link_to 'Vendedores', profiles_path %></h3>
@@ -66,5 +53,5 @@
   <% end %>
 <% else %>
   <%= link_to 'Criar conta', new_user_registration_path %>
-  <%= link_to 'Entrar', new_user_session_path %>
+  <%= link_to 'Entrar', new_user_session_path %>      
 <% end %>

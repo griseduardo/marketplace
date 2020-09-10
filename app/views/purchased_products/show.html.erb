@@ -1,4 +1,4 @@
-<h1>Dados da negociação</h1>
+<h2>Dados da negociação</h2>
 
 <dl>
   <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
@@ -19,7 +19,7 @@
   
   <%= render 'negotiation' %>
 
-  <h2>Enviar mensagem:</h2>
+  <h3>Enviar mensagem:</h3>
   <%= form_with(model: [ @purchased_product, @purchased_product.negotiations.build ], local: true) do |f| %>
     <p>
       <%= f.label :negotiation_message %>
@@ -33,21 +33,21 @@
 
 <% if @purchased_product.iniciada? %>
   <% if current_user == @product.profile.user  %>
-    <h2>Aprovar venda</h2>
+    <h3>Aprovar venda</h3>
     <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
     <%= link_to 'Confirmar venda', confirm_product_purchased_product_path(@product, @purchased_product), method: :post %>
   <% end %>
   <% if current_user == @purchased_product.profile.user  %>
-    <h2>Aguardando aprovação do vendedor</h2>
+    <h3>Aguardando aprovação do vendedor</h3>
   <% end %>
 <% end %>
 
 <% if @purchased_product.recusada? %>
   <% if current_user == @product.profile.user %>
-    <h2>Venda recusada</h2>
+    <h3>Venda recusada</h3>
   <% end %>
   <% if current_user == @purchased_product.profile.user %>
-    <h2>Compra recusada</h2>
+    <h3>Compra recusada</h3>
   <% end %>
   
   <%= render 'end_date' %>
@@ -56,9 +56,9 @@
 <% end %>
 
 <% if @purchased_product.andamento? && current_user == @product.profile.user %>
-  <h2>Cancelar venda</h2>
+  <h3>Cancelar venda</h3>
   <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
-  <h2>Concluir venda</h2>
+  <h3>Concluir venda</h3>
   <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
     <p>
       <%= f.label :freight_cost %>
@@ -76,10 +76,10 @@
 
 <% if @purchased_product.cancelada? %>
   <% if current_user == @product.profile.user %>
-    <h2>Venda cancelada</h2>
+    <h3>Venda cancelada</h3>
   <% end %>
   <% if current_user == @purchased_product.profile.user %>
-    <h2>Compra cancelada</h2>
+    <h3>Compra cancelada</h3>
   <% end %>
 
   <%= render 'end_date' %>
@@ -91,10 +91,10 @@
 
 <% if @purchased_product.finalizada? %>
   <% if current_user == @product.profile.user %>
-    <h2>Venda concluída</h2>
+    <h3>Venda concluída</h3>
   <% end %>
   <% if current_user == @purchased_product.profile.user %>
-    <h2>Compra concluída</h2>
+    <h3>Compra concluída</h3>
   <% end %>
 
   <div><%= render 'end_date' %></div>
