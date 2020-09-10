@@ -1,5 +1,9 @@
 <h2><%= @product.name %></h2>
 
+<% if @product.profile.user == current_user %>
+  <%= link_to 'Editar', edit_product_path(@product) %>
+<% end %>
+
 <dl>
   <%= render 'product' %>
   <dt><%= Product.human_attribute_name(:price) %></dt>

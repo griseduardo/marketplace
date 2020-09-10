@@ -1,0 +1,33 @@
+<%= form_with model: @product, local: true do |f| %>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :product_subcategory_id %>
+    <%= f.grouped_collection_select :product_subcategory_id, @product_category, :product_subcategories, :name, :id, :name  %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+  <div>
+    <%= f.label :price %>
+    <%= f.number_field :price, step: 0.01 %>
+  </div>
+  <div>
+    <%= f.label :product_condition_id %>
+    <%= f.collection_select :product_condition_id, @product_condition, :id, :name  %>
+  </div>
+  <div>
+    <%= f.label :quantity %>
+    <%= f.number_field :quantity %>
+  </div>
+  <div>
+    <%= f.label :images %>
+    <%= f.file_field :images, multiple: true %>
+  </div>
+  <div>
+    <%= f.submit 'Enviar' %>
+  </div>
+<% end %>

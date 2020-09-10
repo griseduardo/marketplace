@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :authenticate_user!, only: [ :index, :show, :new, :create ]
+  before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update ]
 
   def index
     @profile = Profile.find_by(user: current_user)
@@ -35,6 +35,25 @@ class ProductsController < ApplicationController
       @product_subcategory = ProductSubcategory.all
       @product_condition = ProductCondition.all
       render :new
+    end
+  end
+
+  def edit
+    @product = Product.find(params[:id])
+    @product_category = ProductCategory.all
+    @product_subcategory = ProductSubcategory.all
+    @product_condition = ProductCondition.all
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to product_path(@product), notice: 'Editado com sucesso!'
+    else
+      @product_category = ProductCategory.all
+      @product_subcategory = ProductSubcategory.all
+      @product_condition = ProductCondition.all
+      render :edit
     end
   end
 

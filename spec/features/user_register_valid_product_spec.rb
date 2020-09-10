@@ -18,7 +18,7 @@ feature 'User register valid product' do
     login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar produto'
-    click_on 'Cadastrar'
+    click_on 'Enviar'
 
     expect(Product.count).to eq 0
     expect(page).to have_content('não pode ficar em branco', count: 5)
@@ -45,7 +45,7 @@ feature 'User register valid product' do
     fill_in 'Preço', with: '-10'
     select 'Usado', from: 'Condição'
     fill_in 'Quantidade', with: '-3'
-    click_on 'Cadastrar'
+    click_on 'Enviar'
 
     expect(Product.count).to eq 0
     expect(page).to have_content('deve ser maior que 0', count: 1)

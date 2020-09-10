@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   resources :profiles, only: [:index, :show, :new, :create, :edit, :update] do
     get 'search', on: :member
   end
-  resources :products, only: [:index, :show, :new, :create] do
+  resources :products, only: [:index, :show, :new, :create, :edit, :update] do
     resources :questions
     resources :answers
     resources :purchased_products, only: [:show, :new, :create] do

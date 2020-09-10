@@ -46,7 +46,7 @@ feature 'User register product' do
     select 'Usado', from: 'Condição'
     fill_in 'Quantidade', with: '2'
     attach_file 'Imagens', [Rails.root.join('app', 'assets', 'images', 'fevernova1.jpg'), Rails.root.join('app', 'assets', 'images', 'fevernova2.jpg')] 
-    click_on 'Cadastrar'
+    click_on 'Enviar'
 
     expect(page).to have_content('Cadastrado com sucesso!')
     expect(page).to have_content('Carol Gomes')
@@ -72,7 +72,7 @@ feature 'User register product' do
     login_as(user, scope: :user)
     visit root_path
     click_on 'Cadastrar produto'
-    click_on 'Cadastrar'
+    click_on 'Enviar'
     
     expect(page).to have_content('Nome não pode ficar em branco')
     expect(page).to have_content('Subcategoria é obrigatório(a)')
