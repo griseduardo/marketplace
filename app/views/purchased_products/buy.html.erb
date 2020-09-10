@@ -4,90 +4,35 @@
   <h2>Compras aguardando confirmação do vendedor</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.iniciada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt>Vendedor</dt>
-        <dd>
-          <% if purchased_product.product.profile.chosen_name.present? %>
-            <%= purchased_product.product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'purchased_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
 
   <h2>Compras recusadas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.recusada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt>Vendedor</dt>
-        <dd>
-          <% if purchased_product.product.profile.chosen_name.present? %>
-            <%= purchased_product.product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'purchased_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
 
   <h2>Compras em negociação</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.andamento? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt>Vendedor</dt>
-        <dd>
-          <% if purchased_product.product.profile.chosen_name.present? %>
-            <%= purchased_product.product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'purchased_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
 
   <h2>Compras canceladas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.cancelada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt>Vendedor</dt>
-        <dd>
-          <% if purchased_product.product.profile.chosen_name.present? %>
-            <%= purchased_product.product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'purchased_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
 
   <h2>Compras concluídas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.finalizada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt>Vendedor</dt>
-        <dd>
-          <% if purchased_product.product.profile.chosen_name.present? %>
-            <%= purchased_product.product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'purchased_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
 <% end %>

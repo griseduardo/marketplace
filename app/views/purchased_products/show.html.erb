@@ -97,15 +97,21 @@
     <h2>Compra concluída</h2>
   <% end %>
 
-  <%= render 'end_date' %>
+  <div><%= render 'end_date' %></div>
 
-  <%= PurchasedProduct.human_attribute_name(:freight_cost) %>
-  <%= number_to_currency @purchased_product.freight_cost %>
-  <%= PurchasedProduct.human_attribute_name(:discount) %>
-  <%= number_to_currency @purchased_product.discount %>
-  <%= PurchasedProduct.human_attribute_name(:final_value) %>
-  <%= number_to_currency @purchased_product.final_value %>
-
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:freight_cost) %>
+    <%= number_to_currency @purchased_product.freight_cost %>
+  </div>
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:discount) %>
+    <%= number_to_currency @purchased_product.discount %>
+  </div>
+  <div>
+    <%= PurchasedProduct.human_attribute_name(:final_value) %>
+    <%= number_to_currency @purchased_product.final_value %>
+  </div>
+  
   <%= render 'negotiation' %>
 
   <%= render 'question' %>

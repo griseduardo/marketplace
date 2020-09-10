@@ -1,89 +1,34 @@
-<h1>Vendas</h1>
+ <h1>Vendas</h1>
 
 <% if @purchased_products.present? %>
   <h2>Vendas aguardando confirmação</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.iniciada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
-        <dd>
-          <% if purchased_product.profile.chosen_name.present? %>
-            <%= purchased_product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
   <h2>Vendas recusadas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.recusada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
-        <dd>
-          <% if purchased_product.profile.chosen_name.present? %>
-            <%= purchased_product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h2>Vendas em negociação</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.andamento? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
-        <dd>
-          <% if purchased_product.profile.chosen_name.present? %>
-            <%= purchased_product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h2>Vendas canceladas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.cancelada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
-        <dd>
-          <% if purchased_product.profile.chosen_name.present? %>
-            <%= purchased_product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h2>Vendas concluídas</h2>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.finalizada? %>
-      <dl>
-        <dt><%= PurchasedProduct.human_attribute_name(:product) %></dt>
-        <dd><%= link_to purchased_product.product.name, product_purchased_product_path(purchased_product.product.id, purchased_product.id) %></dd>
-        <dt><%= PurchasedProduct.human_attribute_name(:profile) %></dt>
-        <dd>
-          <% if purchased_product.profile.chosen_name.present? %>
-            <%= purchased_product.profile.chosen_name %>
-          <% else %>
-            <%= purchased_product.profile.full_name %>    
-          <% end %>
-        </dd>
-      </dl>          
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
 <% end %>
