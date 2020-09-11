@@ -2,6 +2,9 @@
 
 <% if @product.profile.user == current_user %>
   <%= link_to 'Editar', edit_product_path(@product) %>
+  <% if @purchased_products.empty? %>
+    <%= link_to 'Suspender', suspend_product_path(@product), method: :post %>
+  <% end %>
 <% end %>
 
 <dl>

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     get 'search', on: :member
   end
   resources :products, only: [:index, :show, :new, :create, :edit, :update] do
+    post 'suspend', on: :member
     resources :questions
     resources :answers
     resources :purchased_products, only: [:show, :new, :create] do

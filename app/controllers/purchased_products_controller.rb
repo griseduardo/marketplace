@@ -20,7 +20,12 @@ class PurchasedProductsController < ApplicationController
         @purchased_product.initial_price
       end
       if @purchased_product.save
-        @product.quantity = @product.quantity - @purchased_product.total_quantity 
+        @product.quantity = @product.quantity - @purchased_product.total_quantity
+        if @product.quantity > 0
+          @product.status = :disponível  
+        elsif @product.quantity == 0
+          @product.status = :indisponível
+        end
         @product.save
         redirect_to product_purchased_product_path(@product, @purchased_product), notice: "Compra iniciada!"
       else
@@ -49,6 +54,11 @@ class PurchasedProductsController < ApplicationController
     @purchased_product.end_date = Date.current
     @purchased_product.save
     @product.quantity = @product.quantity + @purchased_product.total_quantity
+    if @product.quantity > 0
+      @product.status = :disponível  
+    elsif @product.quantity == 0
+      @product.status = :indisponível
+    end
     @product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)
   end
@@ -68,6 +78,11 @@ class PurchasedProductsController < ApplicationController
     @purchased_product.end_date = Date.current
     @purchased_product.save
     @product.quantity = @product.quantity + @purchased_product.total_quantity
+    if @product.quantity > 0
+      @product.status = :disponível  
+    elsif @product.quantity == 0
+      @product.status = :indisponível
+    end
     @product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)  
   end

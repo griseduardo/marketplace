@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @questions = Question.where(product: @product)
     @answer = Answer.new
+    @purchased_products = PurchasedProduct.where(product: @product).where(status: :andamento) 
   end
 
   def new
@@ -48,6 +49,12 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if @product.update(product_params)
+      if @product.quantity > 0
+        @product.status = :disponível  
+      elsif @product.quantity == 0
+        @product.status = :indisponível
+      end
+      @product.update(product_params)
       redirect_to product_path(@product), notice: 'Editado com sucesso!'
     else
       @product_category = ProductCategory.all
@@ -57,11 +64,18 @@ class ProductsController < ApplicationController
     end
   end
 
+  def suspend
+    @product = Product.find(params[:id])
+    @product.suspenso!
+    @product.save
+    redirect_to product_path(@product)
+  end
+
   private
 
   def product_params
     params.require(:product)
-          .permit(:name, :product_subcategory_id, :description, :price, 
+          .permit(:name, :status, :product_subcategory_id, :description, :price, 
                   :product_condition_id, :quantity, :profile_id, images:[])
   end
 end

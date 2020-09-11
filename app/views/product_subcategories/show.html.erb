@@ -9,7 +9,7 @@
 <h3>Produtos</h3>
 
 <% @products.each do |product| %>
-  <% if product.profile.user != current_user %>
+  <% if product.profile.user != current_user && !product.suspenso? %>
     <%= link_to image_tag(product.images.first), product %>
     <%= link_to product.name, product %>
   <% end %>

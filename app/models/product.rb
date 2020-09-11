@@ -18,8 +18,8 @@ class Product < ApplicationRecord
   private
 
   def add_status
-    if quantity.present?
-      if quantity >= 1
+    if quantity.present? && status.blank? 
+      if quantity >= 1 
         self.status = :disponível
       else
         self.status = :indisponível

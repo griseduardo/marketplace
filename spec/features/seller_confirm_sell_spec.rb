@@ -31,6 +31,7 @@ feature 'Seller confirm negociation' do
 
     expect(current_path).to eq new_user_session_path
   end
+  
   scenario 'successfully' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user1 = User.create!(email: 'eduardo@rotes.com', password: '120456')
