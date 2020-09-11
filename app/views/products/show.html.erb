@@ -5,6 +5,9 @@
   <% if @purchased_products.empty? %>
     <%= link_to 'Suspender', suspend_product_path(@product), method: :post %>
   <% end %>
+  <% if @product.suspenso? %>
+    <%= link_to 'Reativar', reactivate_product_path(@product), method: :post %>
+  <% end %>
 <% end %>
 
 <dl>

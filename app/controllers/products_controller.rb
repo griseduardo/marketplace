@@ -71,6 +71,17 @@ class ProductsController < ApplicationController
     redirect_to product_path(@product)
   end
 
+  def reactivate
+    @product = Product.find(params[:id])
+    if @product.quantity > 0
+      @product.status = :disponível  
+    elsif @product.quantity == 0
+      @product.status = :indisponível
+    end
+    @product.save
+    redirect_to product_path(@product)
+  end
+
   private
 
   def product_params

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   end
   resources :products, only: [:index, :show, :new, :create, :edit, :update] do
     post 'suspend', on: :member
+    post 'reactivate', on: :member
     resources :questions
     resources :answers
     resources :purchased_products, only: [:show, :new, :create] do
