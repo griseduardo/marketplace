@@ -7,15 +7,15 @@
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
-  <h3>Vendas recusadas</h3>
-  <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.recusada? %>
-      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
-    <% end %>
-  <% end %>
   <h3>Vendas em negociação</h3>
   <% @purchased_products.each do |purchased_product| %>
     <% if purchased_product.andamento? %>
+      <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
+    <% end %>
+  <% end %>
+  <h3>Vendas concluídas</h3>
+  <% @purchased_products.each do |purchased_product| %>
+    <% if purchased_product.finalizada? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
@@ -25,9 +25,9 @@
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
-  <h3>Vendas concluídas</h3>
+  <h3>Vendas recusadas</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.finalizada? %>
+    <% if purchased_product.recusada? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
