@@ -14,7 +14,7 @@
 - Iniciar compra do produto
   - Ao clicar no anúncio do produto de outra pessoa, é possível ver as informações principais dele, tirar dúvidas e iniciar a compra colocando a quantidade que deseja comprar.  
 - Gerenciamento de anúncio
-  - Ao acessar 'Meus produtos' na página inicial, o usuário podera ver seus produtos colocados à venda. Clicando em um deles, poderá ver as informações cadastradas e imagens, responder as perguntar de outros usuários sobre o produto, editar o produto ou suspender o produto para que outras pessoas não possam ver ele no sistema.
+  - Ao acessar 'Meus produtos', o usuário poderá ver seus produtos colocados à venda. Clicando em um deles, poderá ver as informações cadastradas e imagens, responder as perguntar de outros usuários sobre o produto, editar o produto ou suspender o produto para que outras pessoas não possam ver ele no sistema.
 - Etapas de uma compra
   - Compra de um produto
     - Após ver um produto, o usuário coloca a quantidade que deseja comprar e inicia compra.
@@ -37,12 +37,18 @@
 
 > Status do Projeto: Em desenvolvimento
 
+### Versões usadas na aplicação
+
+- [Ruby](https://www.ruby-lang.org/en/documentation/installation/): versão 2.7.0 
+- [Rails](https://guides.rubyonrails.org/v5.0/getting_started.html): versão 6.0.3.2
+- [Node](https://nodejs.org/en/download/): versão 12.18.3
+
 ### Gems utilizadas
 
-<p> [cpf_cnpj](https://github.com/fnando/cpf_cnpj) </p>
-<p> [devise](https://github.com/heartcombo/devise) </p>
-<p> [capybara](https://github.com/teamcapybara/capybara) </p>
-<p> [rspec-rails](https://github.com/rspec/rspec-rails) </p>
+- [cpf_cnpj](https://github.com/fnando/cpf_cnpj) 
+- [devise](https://github.com/heartcombo/devise) 
+- [capybara](https://github.com/teamcapybara/capybara) 
+- [rspec-rails](https://github.com/rspec/rspec-rails) 
 
 # Comando para rodar testes
 
