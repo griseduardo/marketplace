@@ -22,7 +22,7 @@
 
 <%= render 'image' %>
 
-<% if @product.profile.user != current_user %>
+<% if @product.profile.user != current_user && @product.status != 'indisponível' %>
   <h2>Efetuar compra</h2>
   <%= form_with(model: [ @product, @product.purchased_products.build ], local: true) do |f| %>
     <p>
