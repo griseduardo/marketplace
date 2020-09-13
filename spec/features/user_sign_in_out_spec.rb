@@ -4,7 +4,7 @@ feature 'User sign in' do
   scenario 'from home page' do
     visit root_path
 
-    expect(page).to have_link('Entrar')
+    expect(page).to have_link('Entre')
   end
 
   scenario 'successfully' do
@@ -13,7 +13,7 @@ feature 'User sign in' do
     User.create!(email: 'astolfo@rotes.com', password: '123456')
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entre'
     fill_in 'Email', with: 'astolfo@rotes.com'
     fill_in 'Senha', with: '123456'
     click_on 'Entrar'
@@ -26,7 +26,7 @@ feature 'User sign in' do
 
   scenario 'must fill in all fields' do
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entre'
     click_on 'Entrar'
 
     expect(page).to have_content('Email ou senha inválidos.')
@@ -37,7 +37,7 @@ feature 'User sign in' do
     User.create!(email: 'astolfo@rotes.com', password: '123456')
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entre'
     fill_in 'Email', with: 'astolfo@rotes.com'
     fill_in 'Senha', with: '123456'
     click_on 'Entrar'
@@ -45,7 +45,7 @@ feature 'User sign in' do
 
     expect(page).not_to have_content('Rotes')
     expect(page).not_to have_content('Login efetuado com sucesso.')
-    expect(page).to have_link('Entrar')
+    expect(page).to have_link('Entre')
     expect(page).not_to have_link('Sair')
   end
 end

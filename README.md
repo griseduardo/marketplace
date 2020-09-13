@@ -45,10 +45,10 @@
 
 ### Gems utilizadas
 
-- [cpf_cnpj](https://github.com/fnando/cpf_cnpj) 
-- [devise](https://github.com/heartcombo/devise) 
-- [capybara](https://github.com/teamcapybara/capybara) 
-- [rspec-rails](https://github.com/rspec/rspec-rails) 
+- [cpf_cnpj](https://github.com/fnando/cpf_cnpj) - validação de cnpj das empresas 
+- [devise](https://github.com/heartcombo/devise) - cadastro, login e logout de usuário 
+- [capybara](https://github.com/teamcapybara/capybara), [rspec-rails](https://github.com/rspec/rspec-rails) - utilizado para testes da aplicação 
+- [bootstrap-sass](https://github.com/twbs/bootstrap-sass), [sassc-rails](https://github.com/twbs/bootstrap-sass) - framework front-end
 
 # Comando para rodar testes
 

@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User valid sign in' do
   scenario 'and attributes cannot be blank' do
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entre'
     click_on 'Entrar'
 
     expect(page).to have_content('Email ou senha inválidos.', count: 1)
@@ -14,7 +14,7 @@ feature 'User valid sign in' do
     User.create!(email: 'astolfo@rotes.com', password: '123456')
 
     visit root_path
-    click_on 'Entrar'
+    click_on 'Entre'
     fill_in 'Email', with: 'edgar@rotes.com'
     fill_in 'Senha', with: '038291'
     click_on 'Entrar'
