@@ -82,6 +82,7 @@ feature 'User view products' do
     visit root_path
 
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
+    expect(page).to have_content('R$ 240,00')
     expect(body).to include('fevernova1.jpg')
     expect(body).not_to include('fevernova2.jpg')
     expect(body).not_to include('brigadeiro1.png')
@@ -159,6 +160,7 @@ feature 'User view products' do
     click_on 'Esporte e lazer'
 
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
+    expect(page).to have_content('R$ 240,00')
     expect(body).to include('fevernova1.jpg')
     expect(body).not_to include('fevernova2.jpg')
     expect(body).not_to include('brigadeiro1.png')
@@ -256,6 +258,7 @@ feature 'User view products' do
     click_on 'Doces'
 
     expect(page).to have_content('Bolo de brigadeiro')
+    expect(page).to have_content('R$ 30,00')
     expect(body).to include('brigadeiro1.png')
     expect(body).not_to include('brigadeiro2.jpg')
     expect(body).not_to include('fevernova1.jpg')
@@ -355,6 +358,7 @@ feature 'User view products' do
     click_on 'Carol Gomes'
 
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
+    expect(page).to have_content('R$ 240,00')
     expect(body).to include('fevernova1.jpg')
     expect(body).not_to include('fevernova2.jpg')
     expect(body).not_to include('brigadeiro1.png')
@@ -420,6 +424,7 @@ feature 'User view products' do
     click_on 'Meus produtos'
 
     expect(page).to have_content('Bolo de brigadeiro')
+    expect(page).to have_content('R$ 30,00')
     expect(body).to include('brigadeiro1.png')
     expect(body).not_to include('brigadeiro2.jpg')
     expect(page).not_to have_content('Adidas Fevernova - Bola da copa de 2002')

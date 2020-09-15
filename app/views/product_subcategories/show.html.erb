@@ -18,8 +18,11 @@
 
 <% @products.each do |product| %>
   <% if product.profile.user != current_user && !product.suspenso? %>
-    <%= link_to image_tag(product.images.first), product %>
-    <%= link_to product.name, product %>
+    <div class='image_list'>
+      <%= link_to product.name, product %><br>
+      <%= link_to image_tag(product.images.first), product %><br>
+      <%= "Preço: #{number_to_currency product.price}" %>
+    </div>
   <% end %>
 <% end %>
 
