@@ -30,19 +30,23 @@
   <h2>Cancelar venda</h2>
   <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
   <h2>Concluir venda</h2>
-  <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
-    <p>
-      <%= f.label :freight_cost %>
-      <%= f.number_field :freight_cost, step: 0.01, min: 0 %>
-    </p>
-    <p>
-      <%= f.label :discount %>
-      <%= f.number_field :discount, step: 0.01, min: 0 %>
-    </p>
-    <p>
-      <%= f.submit 'Concluir venda' %>
-    </p>
-  <% end %>
+  <div class='container row'>
+    <%= form_with(model: [ @product, @purchased_product ], url: conclude_product_purchased_product_path, local: true, method: :post) do |f| %>
+      <div class='col-xs-2'>
+        <div class='form-group'>
+          <%= f.label :freight_cost %>
+          <%= f.number_field :freight_cost, step: 0.01, min: 0, class: 'form-control' %>
+        </div>
+        <div class='form-group'>
+          <%= f.label :discount %>
+          <%= f.number_field :discount, step: 0.01, min: 0, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.submit 'Concluir venda', class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
 <% if @purchased_product.cancelada? %>
@@ -110,15 +114,20 @@
   <%= render 'negotiation' %>
 
   <h3>Enviar mensagem:</h3>
-  <%= form_with(model: [ @purchased_product, @purchased_product.negotiations.build ], local: true) do |f| %>
-    <p>
-      <%= f.label :negotiation_message %>
-      <%= f.text_field :negotiation_message %>
-    </p>
-    <p>
-      <%= f.submit 'Enviar mensagem' %>
-    </p>
-  <% end %>
+  <div class='container row'>
+    <%= form_with(model: [ @purchased_product, @purchased_product.negotiations.build ], local: true) do |f| %>
+      <div class='col-xs-3'>
+        <div class='form-group'>
+          <%= f.label :negotiation_message %>
+          <%= f.text_area :negotiation_message, class: 'form-control' %>
+        </div>
+        <div>
+          <%= f.submit 'Enviar mensagem', class: 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  
 <% end %>
 
 <h1><%= @product.name %></h1>

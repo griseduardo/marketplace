@@ -23,11 +23,19 @@
   <dd><%= @profile.department.name %></dd>
 </dl>
 
-<%= form_with url: search_profile_path, method: :get, local: true do |f| %>
-  <%= f.label :q, 'Busca de produto' %>
-  <%= f.text_field :q %>
-  <%= f.submit 'Buscar' %>
-<% end %>
+  <%= form_with url: search_profile_path, method: :get, local: true do |f| %>
+    <div class='form-group'>
+      <div>
+        <%= f.label :q, 'Busca de produto' %>
+      </div>
+      <div class='col-xs-10'>
+        <%= f.text_field :q, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.submit 'Buscar', class: 'btn btn-default' %>
+      </div>
+    </div>
+  <% end %>
 
 <% @products.each do |product| %>
   <% if product.profile.user != current_user && !product.suspenso? %>

@@ -32,11 +32,19 @@
   <% end %>
   
   <%= form_with url: search_path, method: :get, local: true do |f| %>
-    <%= f.label :q, 'Busca de produto' %>
-    <%= f.text_field :q %>
-    <%= f.submit 'Buscar' %>
+    <div class='form-group'>
+      <div>
+        <%= f.label :q, 'Busca de produto' %>
+      </div>
+      <div class='col-xs-10'>
+        <%= f.text_field :q, class: 'form-control' %>
+      </div>
+      <div>
+        <%= f.submit 'Buscar', class: 'btn btn-default' %>
+      </div>
+    </div>
   <% end %>
-
+  
   <h3><%= link_to 'Vendedores', profiles_path %></h3>
 
   <h3>Produtos</h3>

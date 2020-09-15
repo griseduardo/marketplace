@@ -10,19 +10,19 @@
   </head>
 
   <header>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
+    <nav class='navbar navbar-inverse'>
+      <div class='container-fluid'>
         <% if user_signed_in? %>
-          <div class="navbar-header">
+          <div class='navbar-header'>
             <%= link_to "MarketPlace - #{current_user.company.name}", root_path, class: 'navbar-brand' %>
           </div>
-          <ul class="nav navbar-nav">
+          <ul class='nav navbar-nav'>
             <li><%= link_to 'Cadastrar produto', new_product_path %></li>
             <li><%= link_to 'Meus produtos', products_path %></li>
             <li><%= link_to 'Vendas', sell_purchased_products_path %></li>
             <li><%= link_to 'Compras', buy_purchased_products_path %></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class='nav navbar-nav navbar-right'>
             <% if current_user.profile.blank? %>
               <li><%= link_to 'Meu perfil', new_profile_path %></li>
             <% else %>
@@ -31,10 +31,10 @@
             <li><%= link_to 'Sair', destroy_user_session_path, method: :delete %></li>
           </ul>
         <% else %>
-          <div class="navbar-header">
+          <div class='navbar-header'>
             <%= link_to 'MarketPlace' , root_path, class: 'navbar-brand' %>
           </div>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class='nav navbar-nav navbar-right'>
             <li><%= link_to 'Criar conta', new_user_registration_path %></li>
             <li><%= link_to 'Entre', new_user_session_path %></li>
           </ul>
