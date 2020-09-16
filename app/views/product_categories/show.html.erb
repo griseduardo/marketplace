@@ -17,7 +17,11 @@
 <h3>Subcategorias</h3>
 
 <% @product_category.product_subcategories.each do |product_subcategory| %>
-  <%= link_to product_subcategory.name, product_subcategory %>
+  <% if product_subcategory == @product_category.product_subcategories.last %>
+    <%= link_to product_subcategory.name, product_subcategory %>
+  <% else %>
+    <%= link_to "#{product_subcategory.name} |", product_subcategory %>
+  <% end %>
 <% end %>
 
 <% if @product_category.product_subcategories.empty? %>

@@ -23,7 +23,11 @@
  <h2>Categorias</h2>
   <p>
     <% @product_categories.each do |product_category| %>
-      <%= link_to product_category.name, product_category %>
+      <% if product_category == @product_categories.last %>
+        <%= link_to product_category.name, product_category %>
+      <% else %>
+        <%= link_to "#{product_category.name} |", product_category %>
+      <% end %>
     <% end %>
   </p>
 
