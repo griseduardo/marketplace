@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update ]
+  before_action :verify_profile, only: [ :edit ]
 
   def index
     @users = User.all.where(company: current_user.company)
@@ -56,5 +57,11 @@ class ProfilesController < ApplicationController
   def profile_params
     params.require(:profile)
           .permit(:full_name, :chosen_name, :birthday, :work_address, :position, :sector, :department_id, :user_id)
+  end
+
+  def verify_profile
+    unless current_user.profile == Profile.find(params[:id])
+      redirect_to root_path, notice: 'Somente pode editar seu próprio perfil!'
+    end
   end
 end

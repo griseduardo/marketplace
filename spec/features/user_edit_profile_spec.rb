@@ -19,6 +19,23 @@ feature 'User edit profile' do
     expect(current_path).to eq new_user_session_path
   end
 
+  scenario 'must be current user profile to edit' do
+    Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
+    user1 = User.create!(email: 'carol@rotes.com', password: '123456')
+    user2 = User.create!(email: 'eduardo@rotes.com', password: '12ab56')
+    department = Department.create!(name: 'RH')
+    profile1 = Profile.create!(full_name: 'Carol Pires', birthday: '10/03/1993', position: 'Auxiliar', 
+                               department: department, user: user1, work_address: 'Rua Evans, 30')
+    profile2 = Profile.create!(full_name: 'Eduardo Gomes', birthday: '10/03/1992', position: 'Assistente', 
+                               department: department, user: user2, work_address: 'Rua Evans, 30')
+    
+    login_as(user1, scope: :user)
+    visit edit_profile_path(profile2)
+
+    expect(current_path).to eq root_path
+    expect(page).to have_content('Somente pode editar seu próprio perfil!')
+  end
+
   scenario 'successfully' do
     Company.create!(name: 'Rotes', cnpj: '96.672.638/0001-48', domain: 'rotes.com')
     user = User.create!(email: 'carol@rotes.com', password: '123456')
