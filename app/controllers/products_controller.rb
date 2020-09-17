@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update ]
+  before_action :verify_product_owner, only: [ :edit ]
 
   def index
     @profile = Profile.find_by(user: current_user)
@@ -88,5 +89,11 @@ class ProductsController < ApplicationController
     params.require(:product)
           .permit(:name, :status, :product_subcategory_id, :description, :price, 
                   :product_condition_id, :quantity, :profile_id, images:[])
+  end
+
+  def verify_product_owner
+    unless current_user.profile == Product.find(params[:id]).profile
+      redirect_to root_path, notice: 'Somente pode editar seu próprio produto!'
+    end
   end
 end
