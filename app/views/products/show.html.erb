@@ -5,7 +5,7 @@
   <% if @purchased_products.empty? %>
     <%= link_to 'Suspender', suspend_product_path(@product), method: :post %>
   <% end %>
-  <% if @product.suspenso? %>
+  <% if @product.suspended? %>
     <%= link_to 'Reativar', reactivate_product_path(@product), method: :post %>
   <% end %>
 <% end %>
@@ -17,12 +17,12 @@
   <dt><%= Product.human_attribute_name(:quantity) %></dt>
   <dd><%= @product.quantity %></dd>
   <dt><%= Product.human_attribute_name(:status) %></dt>
-  <dd><%= @product.status.capitalize %></dd>
+  <dd><%= Product.human_attribute_name("status.#{@product.status}") %></dd>
 </dl>
 
 <%= render 'image' %>
 
-<% if @product.profile.user != current_user && @product.status != 'indisponível' %>
+<% if @product.profile.user != current_user && !@product.unavailable? %>
   <h2>Efetuar compra</h2>
   <%= form_with(model: [ @product, @product.purchased_products.build ], local: true, class: 'form-inline') do |f| %>
     <div class='form-group'>

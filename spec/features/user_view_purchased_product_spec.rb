@@ -251,7 +251,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.recusada!
+    purchased_product.refused!
     
     login_as(user2, scope: :user)
     visit root_path
@@ -260,7 +260,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Vendas recusadas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Eduardo Rodrigues')
-    expect(purchased_product.status).to eq 'recusada'
+    expect(purchased_product.status).to eq 'refused'
   end
 
   scenario 'and buyer visualize list of refused purchases' do
@@ -287,7 +287,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.recusada!
+    purchased_product.refused!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -296,7 +296,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Compras recusadas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Carol Gomes')
-    expect(purchased_product.status).to eq 'recusada'
+    expect(purchased_product.status).to eq 'refused'
   end
 
   scenario 'and seller visualize specific refused sell historic' do
@@ -331,7 +331,7 @@ feature 'User view purchased product' do
     answer1 = Answer.create!(answer_message: 'Nenhuma marca presente', question: question1)
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
-    purchased_product.recusada!
+    purchased_product.refused!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -356,7 +356,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'recusada'
+    expect(purchased_product.status).to eq 'refused'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end
@@ -393,7 +393,7 @@ feature 'User view purchased product' do
     answer1 = Answer.create!(answer_message: 'Nenhuma marca presente', question: question1)
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
-    purchased_product.recusada!
+    purchased_product.refused!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -418,7 +418,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'recusada'
+    expect(purchased_product.status).to eq 'refused'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end
@@ -447,7 +447,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -480,7 +480,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -513,7 +513,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -522,7 +522,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Vendas em negociação')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Eduardo Rodrigues')
-    expect(purchased_product.status).to eq 'andamento'
+    expect(purchased_product.status).to eq 'in_progress'
   end
 
   scenario 'and buyer visualize list of negotiation purchases' do
@@ -549,7 +549,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -558,7 +558,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Compras em negociação')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Carol Gomes')
-    expect(purchased_product.status).to eq 'andamento'
+    expect(purchased_product.status).to eq 'in_progress'
   end
 
   scenario 'and seller visualize specific negotiation sell' do
@@ -589,7 +589,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
 
@@ -615,7 +615,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'andamento'
+    expect(purchased_product.status).to eq 'in_progress'
   end
 
   scenario 'and buyer visualize specific negotiation purchase' do
@@ -646,7 +646,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
 
@@ -672,7 +672,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'andamento'
+    expect(purchased_product.status).to eq 'in_progress'
   end
 
   scenario 'and seller visualize list of canceled sells' do
@@ -699,7 +699,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.cancelada!
+    purchased_product.canceled!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -708,7 +708,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Vendas canceladas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Eduardo Rodrigues')
-    expect(purchased_product.status).to eq 'cancelada'
+    expect(purchased_product.status).to eq 'canceled'
   end
 
   scenario 'and buyer visualize list of canceled purchases' do
@@ -735,7 +735,7 @@ feature 'User view purchased product' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.cancelada!
+    purchased_product.canceled!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -744,7 +744,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Compras canceladas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Carol Gomes')
-    expect(purchased_product.status).to eq 'cancelada'
+    expect(purchased_product.status).to eq 'canceled'
   end
 
   scenario 'and seller visualize specific canceled sell historic' do
@@ -780,7 +780,7 @@ feature 'User view purchased product' do
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
-    purchased_product.cancelada!
+    purchased_product.canceled!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -806,7 +806,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'cancelada'
+    expect(purchased_product.status).to eq 'canceled'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end
@@ -844,7 +844,7 @@ feature 'User view purchased product' do
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
-    purchased_product.cancelada!
+    purchased_product.canceled!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -870,7 +870,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'cancelada'
+    expect(purchased_product.status).to eq 'canceled'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end
@@ -900,7 +900,7 @@ feature 'User view purchased product' do
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030',
                                                  end_date: '12/04/2030', freight_cost: '10', discount: '30', final_value: '460')
-    purchased_product.finalizada!
+    purchased_product.finished!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -909,7 +909,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Vendas concluídas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Eduardo Rodrigues')
-    expect(purchased_product.status).to eq 'finalizada'
+    expect(purchased_product.status).to eq 'finished'
   end
 
   scenario 'and buyer visualize list of concluded purchases' do
@@ -937,7 +937,7 @@ feature 'User view purchased product' do
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030',
                                                  end_date: '12/04/2030', freight_cost: '10', discount: '30', final_value: '460')    
-    purchased_product.finalizada!
+    purchased_product.finished!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -946,7 +946,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Compras concluídas')
     expect(page).to have_content('Adidas Fevernova - Bola da copa de 2002')
     expect(page).to have_content('Carol Gomes')
-    expect(purchased_product.status).to eq 'finalizada'
+    expect(purchased_product.status).to eq 'finished'
   end
 
   scenario 'and seller visualize specific concluded sell historic' do
@@ -983,7 +983,7 @@ feature 'User view purchased product' do
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
-    purchased_product.finalizada!
+    purchased_product.finished!
 
     login_as(user2, scope: :user)
     visit root_path
@@ -1013,7 +1013,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'finalizada'
+    expect(purchased_product.status).to eq 'finished'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end
@@ -1052,7 +1052,7 @@ feature 'User view purchased product' do
     question2 = Question.create!(product: product2, profile: profile3, question_message: 'A bola foi usada na copa?')
     answer2 = Answer.create!(answer_message: 'Somente na copa do meu bairro', question: question2)
     Negotiation.create!(profile: profile2, purchased_product: purchased_product, negotiation_message: 'Qual endereço de entrega?')
-    purchased_product.finalizada!
+    purchased_product.finished!
 
     login_as(user1, scope: :user)
     visit root_path
@@ -1082,7 +1082,7 @@ feature 'User view purchased product' do
     expect(page).to have_content('Usado')
     expect(body).to include('fevernova1.jpg')
     expect(body).to include('fevernova2.jpg')
-    expect(purchased_product.status).to eq 'finalizada'
+    expect(purchased_product.status).to eq 'finished'
     expect(page).not_to have_content('A bola foi usada na copa?')
     expect(page).not_to have_content('Somente na copa do meu bairro')
   end

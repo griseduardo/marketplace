@@ -25,7 +25,7 @@ feature 'User send valid message in negotiation' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: total_quantity, 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')
-    purchased_product.andamento!
+    purchased_product.in_progress!
 
     login_as(user2, scope: :user)
     visit root_path

@@ -7,7 +7,7 @@ class Product < ApplicationRecord
   has_many :purchased_products
   has_many_attached :images
 
-  enum status: { disponível: 0, indisponível:10, suspenso: 20 }
+  enum status: { available: 0, unavailable:10, suspended: 20 }
   
   validates :name, :description, :price, :quantity, :images, presence: true
   validates_numericality_of :price, greater_than: 0
@@ -20,9 +20,9 @@ class Product < ApplicationRecord
   def add_status
     if quantity.present? && status.blank? 
       if quantity >= 1 
-        self.status = :disponível
+        self.status = :available
       else
-        self.status = :indisponível
+        self.status = :unavailable
       end
     end
   end

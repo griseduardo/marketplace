@@ -2,7 +2,7 @@
   <p><%= message %></p>
 <% end %>
 
-<% if @purchased_product.iniciada? %>
+<% if @purchased_product.initiated? %>
   <% if current_user == @product.profile.user  %>
     <h2>Aprovar venda</h2>
     <%= link_to 'Recusar venda', refuse_product_purchased_product_path(@product, @purchased_product), method: :post %>
@@ -13,7 +13,7 @@
   <% end %>
 <% end %>
 
-<% if @purchased_product.recusada? %>
+<% if @purchased_product.refused? %>
   <% if current_user == @product.profile.user %>
     <h2>Venda recusada</h2>
   <% end %>
@@ -26,7 +26,7 @@
   <%= render 'answer_question' %>
 <% end %>
 
-<% if @purchased_product.andamento? && current_user == @product.profile.user %>
+<% if @purchased_product.in_progress? && current_user == @product.profile.user %>
   <h2>Cancelar venda</h2>
   <%= link_to 'Cancelar venda', cancel_product_purchased_product_path(@product, @purchased_product), method: :post %>
   <h2>Concluir venda</h2>
@@ -49,7 +49,7 @@
   </div>
 <% end %>
 
-<% if @purchased_product.cancelada? %>
+<% if @purchased_product.canceled? %>
   <% if current_user == @product.profile.user %>
     <h2>Venda cancelada</h2>
   <% end %>
@@ -64,7 +64,7 @@
   <%= render 'answer_question' %>
 <% end %>
 
-<% if @purchased_product.finalizada? %>
+<% if @purchased_product.finished? %>
   <% if current_user == @product.profile.user %>
     <h2>Venda concluída</h2>
   <% end %>
@@ -109,7 +109,7 @@
   <dd><%= l @purchased_product.start_date %></dd>
 </dl>
 
-<% if @purchased_product.andamento? %>
+<% if @purchased_product.in_progress? %>
   
   <%= render 'negotiation' %>
 

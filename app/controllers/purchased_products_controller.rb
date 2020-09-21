@@ -22,9 +22,9 @@ class PurchasedProductsController < ApplicationController
       if @purchased_product.save
         @product.quantity = @product.quantity - @purchased_product.total_quantity
         if @product.quantity > 0
-          @product.status = :disponível  
+          @product.status = :available  
         elsif @product.quantity == 0
-          @product.status = :indisponível
+          @product.status = :unavailable
         end
         @product.save
         redirect_to product_purchased_product_path(@product, @purchased_product), notice: "Compra iniciada!"
@@ -50,14 +50,14 @@ class PurchasedProductsController < ApplicationController
   def refuse
     @product = Product.find(params[:product_id])
     @purchased_product = PurchasedProduct.find(params[:id])
-    @purchased_product.recusada!
+    @purchased_product.refused!
     @purchased_product.end_date = Date.current
     @purchased_product.save
     @product.quantity = @product.quantity + @purchased_product.total_quantity
     if @product.quantity > 0
-      @product.status = :disponível  
+      @product.status = :available
     elsif @product.quantity == 0
-      @product.status = :indisponível
+      @product.status = :unavailable
     end
     @product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)
@@ -66,7 +66,7 @@ class PurchasedProductsController < ApplicationController
   def confirm
     @product = Product.find(params[:product_id])
     @purchased_product = PurchasedProduct.find(params[:id])
-    @purchased_product.andamento!
+    @purchased_product.in_progress!
     @purchased_product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)
   end
@@ -74,14 +74,14 @@ class PurchasedProductsController < ApplicationController
   def cancel
     @product = Product.find(params[:product_id])
     @purchased_product = PurchasedProduct.find(params[:id])
-    @purchased_product.cancelada!
+    @purchased_product.canceled!
     @purchased_product.end_date = Date.current
     @purchased_product.save
     @product.quantity = @product.quantity + @purchased_product.total_quantity
     if @product.quantity > 0
-      @product.status = :disponível  
+      @product.status = :available  
     elsif @product.quantity == 0
-      @product.status = :indisponível
+      @product.status = :unavailable
     end
     @product.save
     redirect_to product_purchased_product_path(@product, @purchased_product)  
@@ -94,7 +94,7 @@ class PurchasedProductsController < ApplicationController
     @purchased_product.end_date = Date.current
     @purchased_product.calculate_value
     if @purchased_product.save
-      @purchased_product.finalizada!
+      @purchased_product.finished!
       redirect_to product_purchased_product_path(@product, @purchased_product)
     else
       render :show

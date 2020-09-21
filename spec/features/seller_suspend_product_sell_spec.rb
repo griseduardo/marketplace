@@ -25,7 +25,7 @@ feature 'Seller suspend product sell' do
     click_on 'Suspender'
     product.reload
   
-    expect(product.status).to eq 'suspenso'
+    expect(product.status).to eq 'suspended'
   end
 
   scenario 'must not have ongoing sells' do
@@ -58,8 +58,8 @@ feature 'Seller suspend product sell' do
                                                  initial_value: total_quantity * product.price, start_date: '10/04/2030')
     purchased_product2 = PurchasedProduct.create!(product: product, profile: profile3, total_quantity: total_quantity2, 
                                                   initial_value: total_quantity2 * product.price, start_date: '10/04/2030')                                                
-    purchased_product.andamento!
-    purchased_product2.finalizada!
+    purchased_product.in_progress!
+    purchased_product2.finished!
 
     login_as(user, scope: :user)
     visit root_path

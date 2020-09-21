@@ -331,7 +331,7 @@ feature 'User searches product' do
                            description: 'Bolo de brigadeiro com bastante recheio', price: '30', product_condition: product_condition1, 
                            quantity: '1', profile: profile2)
     product1.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
-    product1.suspenso!
+    product1.suspended!
     product1.save!
     product_category2 = ProductCategory.create!(name: 'Esporte e lazer')
     product_subcategory2 = ProductSubcategory.create!(name: 'Bola', product_category: product_category2)
@@ -562,7 +562,7 @@ feature 'User searches product' do
                            description: 'Bolo de brigadeiro com bastante recheio', price: '30', product_condition: product_condition1, 
                            quantity: '1', profile: profile2)
     product1.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
-    product1.suspenso!
+    product1.suspended!
     product1.save!
     product_subcategory2 = ProductSubcategory.create!(name: 'Bola', product_category: product_category1)
     product_condition2 = ProductCondition.create!(name: 'Usado')
@@ -799,7 +799,7 @@ feature 'User searches product' do
                            description: 'Bolo de brigadeiro com bastante recheio', price: '30', product_condition: product_condition1, 
                            quantity: '1', profile: profile2)
     product1.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
-    product1.suspenso!
+    product1.suspended!
     product1.save!
     product_condition2 = ProductCondition.create!(name: 'Usado')
     product2 = Product.new(name: 'Adidas Fevernova - Bola da copa de 2002', product_subcategory: product_subcategory1, 
@@ -958,7 +958,7 @@ feature 'User searches product' do
                            description: 'Bolo de brigadeiro com bastante recheio', price: '30', product_condition: product_condition1, 
                            quantity: '1', profile: profile2)
     product1.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
-    product1.suspenso!
+    product1.suspended!
     product1.save!
     product_category2 = ProductCategory.create!(name: 'Esporte e lazer')
     product_subcategory2 = ProductSubcategory.create!(name: 'Bola', product_category: product_category2)

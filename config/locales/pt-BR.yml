@@ -1,6 +1,17 @@
 ---
 pt-BR:
   activerecord:
+    attributes:
+      product/status:
+        available: 'Disponível'
+        unavailable: 'Indisponível'
+        suspended: 'Suspenso'
+      purchased_product/status:
+        initiated: 'Iniciada'
+        refused: 'Recusada'
+        in_progress: 'Em progresso'
+        finished: 'Finalizada'
+        canceled: 'Cancelada'
     errors:
       messages:
         record_invalid: 'A validação falhou: %{errors}'

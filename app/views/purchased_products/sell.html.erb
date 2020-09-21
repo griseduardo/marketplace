@@ -3,31 +3,31 @@
 <% if @purchased_products.present? %>
   <h3>Vendas aguardando confirmação</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.iniciada? %>
+    <% if purchased_product.initiated? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>          
     <% end %>
   <% end %>
   <h3>Vendas em negociação</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.andamento? %>
+    <% if purchased_product.in_progress? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h3>Vendas concluídas</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.finalizada? %>
+    <% if purchased_product.finished? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h3>Vendas canceladas</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.cancelada? %>
+    <% if purchased_product.canceled? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>
   <h3>Vendas recusadas</h3>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.recusada? %>
+    <% if purchased_product.refused? %>
       <%= render partial: 'selled_product', locals: { purchased_product: purchased_product } %>           
     <% end %>
   <% end %>

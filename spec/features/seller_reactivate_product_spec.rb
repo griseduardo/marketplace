@@ -16,7 +16,7 @@ feature 'Seller reactivate product' do
                           quantity: '1', profile: profile)
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro2.jpg')), filename: 'brigadeiro2.jpg')
-    product.suspenso!
+    product.suspended!
     product.save!
 
     visit product_path(product)
@@ -39,7 +39,7 @@ feature 'Seller reactivate product' do
                           quantity: '1', profile: profile)
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro2.jpg')), filename: 'brigadeiro2.jpg')
-    product.suspenso!
+    product.suspended!
     product.save!
 
     login_as(user, scope: :user)
@@ -49,7 +49,7 @@ feature 'Seller reactivate product' do
     click_on 'Reativar'
     product.reload
   
-    expect(product.status).to eq 'disponível'
+    expect(product.status).to eq 'available'
   end
 
   scenario 'must be suspended to reactivate product' do
@@ -67,7 +67,7 @@ feature 'Seller reactivate product' do
                           quantity: '1', profile: profile)
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro1.png')), filename: 'brigadeiro1.png')
     product.images.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'brigadeiro2.jpg')), filename: 'brigadeiro2.jpg')
-    product.status = :disponível
+    product.status = :available
     product.save!
 
     login_as(user, scope: :user)

@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @questions = Question.where(product: @product)
     @answer = Answer.new
-    @purchased_products = PurchasedProduct.where(product: @product).where(status: :andamento) 
+    @purchased_products = PurchasedProduct.where(product: @product).where(status: :in_progress) 
   end
 
   def new
@@ -51,9 +51,9 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     if @product.update(product_params)
       if @product.quantity > 0
-        @product.status = :disponível  
+        @product.status = :available  
       elsif @product.quantity == 0
-        @product.status = :indisponível
+        @product.status = :unavailable
       end
       @product.update(product_params)
       redirect_to product_path(@product), notice: 'Editado com sucesso!'
@@ -67,7 +67,7 @@ class ProductsController < ApplicationController
 
   def suspend
     @product = Product.find(params[:id])
-    @product.suspenso!
+    @product.suspended!
     @product.save
     redirect_to product_path(@product)
   end
@@ -75,9 +75,9 @@ class ProductsController < ApplicationController
   def reactivate
     @product = Product.find(params[:id])
     if @product.quantity > 0
-      @product.status = :disponível  
+      @product.status = :available  
     elsif @product.quantity == 0
-      @product.status = :indisponível
+      @product.status = :unavailable
     end
     @product.save
     redirect_to product_path(@product)

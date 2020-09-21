@@ -1,18 +1,18 @@
 <% if @purchased_products.present? %>
   <% @purchased_products.each do |purchased_product| %>
-    <% if purchased_product.iniciada? && purchased_product.product.profile == current_user.profile %>
+    <% if purchased_product.initiated? && purchased_product.product.profile == current_user.profile %>
       <h4>Venda aguardando confirmação:</h4>
       <%= purchased_product.product.name %>    
     <% end %>
-    <% if purchased_product.iniciada? && purchased_product.profile == current_user.profile %>
+    <% if purchased_product.initiated? && purchased_product.profile == current_user.profile %>
       <h4>Compra aguardando confirmação do vendedor:</h4>
       <%= purchased_product.product.name %>    
     <% end %>
-    <% if purchased_product.andamento? && purchased_product.product.profile == current_user.profile %>
+    <% if purchased_product.in_progress? && purchased_product.product.profile == current_user.profile %>
       <h4>Venda em negociação:</h4>
       <%= purchased_product.product.name %>    
     <% end %>
-    <% if purchased_product.andamento? && purchased_product.profile == current_user.profile %>
+    <% if purchased_product.in_progress? && purchased_product.profile == current_user.profile %>
       <h4>Compra em negociação:</h4>
       <%= purchased_product.product.name %>    
     <% end %>
@@ -54,7 +54,7 @@
   <h3>Produtos</h3>
 
   <% @products.each do |product| %>
-    <% if product.profile.user != current_user && !product.suspenso? %>
+    <% if product.profile.user != current_user && !product.suspended? %>
       <div class='image_list'>
         <%= link_to product.name, product %><br>
         <%= link_to image_tag(product.images.first), product %><br>

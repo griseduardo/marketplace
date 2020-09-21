@@ -31,7 +31,7 @@ feature 'Seller cancel sell' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')                                                
-    purchased_product.andamento!
+    purchased_product.in_progress!
     product2.quantity = product2.quantity - total_quantity 
     product2.reload
     
@@ -68,7 +68,7 @@ feature 'Seller cancel sell' do
     total_quantity = 2
     purchased_product = PurchasedProduct.create!(product: product2, profile: profile1, total_quantity: '2', 
                                                  initial_value: total_quantity * product2.price, start_date: '10/04/2030')                                                
-    purchased_product.andamento!
+    purchased_product.in_progress!
     product2.quantity = product2.quantity - total_quantity 
     product2.reload
 
